@@ -18,8 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::get('/deshbord', function () {
+//     return view('admin.pages.index');
+// });
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.pages.index');
+   // return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
