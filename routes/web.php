@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
 Route::get('/', function () {
     return view('auth.login');
 });
+// Route::get('/brands', function () {
+//     return view('admin.pages.brands');
+// })->name('brands');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -29,3 +37,13 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+//brand route
+//--------------
+Route::get('brands', [UserController::class,'index'])->name('brands');
+Route::post('brand',[UserController::class,'store'])->name('store_brand');
+Route::get('edit/{id}', [UserController::class, 'edit'])->name('edit');
+Route::post('update/{id}', [UserController::class, 'update'])->name('update_brand');
+
+
