@@ -7,10 +7,9 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-##  Laravel + Tailwind Css Admin Project with (Admin and Front-end)
+##  Laravel + Tailwind Css Admin Project with 
 - login user 
 - logout user
-- create user
   
 ## How to run the code
 - git clone https://github.com/jayesh-parmar/inventory-management.git
@@ -24,6 +23,6 @@
 - 
 ## For Login
 - #### Admin
-- email: admin@gmail.com.com
+- email: admin@gmail.com
 - password : admin123
 
