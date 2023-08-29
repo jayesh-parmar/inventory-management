@@ -7,20 +7,42 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+
+## Documentation
+- in this project we are use admin panel for admin so admin can login and logout  and 
+- admin can add company brand name and edit brand name
+.
+
+## Important notes for developers
+- We are using OCI High availability MySQL instance in production. It requires that all the tables in the database must have primary keys.
+
+## Technical
+- The information about the development process and reference details are recorded in <a href="https://github.com/jayesh-parmar/inventory-management/compare/Technical.md?expand=1" >this file</a>
+
+## Requirements
+- laravel 10
+- PHP 8.2
+- npm 
+- composer 
+
+
 ##  Laravel + Tailwind Css Admin Project with 
 - login user 
 - logout user
+- add and update brands
   
-## How to run the code
+## Installation
 - git clone https://github.com/jayesh-parmar/inventory-management.git
-- cd inventory-management
-- cp .env.example `.env`
+- Create .env file from the example file:
+- `php -r "file_exists('.env') || copy('.env.example', '.env');"`
 - open .env and update DB_DATABASE (database details)
-- run : `composer install`
-- run : `php artisan key:generate`
-- run : `php artisan migrate:fresh --seed`
+- Install the dependencies : `composer install`
+- NPM : `npm install`
+- `npm run dev` and start developing...
+- Generate Key : `php artisan key:generate`
+- DB migrate and Seeding : `php artisan migrate:fresh --seed`
 - run : `php artisan serve`
-- 
+
 ## For Login
 - #### Admin
 - email: admin@gmail.com
