@@ -12,20 +12,12 @@
 - in this project we are use admin panel for admin so admin can login and logout  and 
 - admin can add company brand name and edit brand name
 .
-
-## Important notes for developers
-- We are using OCI High availability MySQL instance in production. It requires that all the tables in the database must have primary keys.
-
-## Technical
-- The information about the development process and reference details are recorded in <a href="https://github.com/jayesh-parmar/inventory-management/compare/Technical.md?expand=1" >this file</a>
-
 ## Requirements
 - laravel 10
 - PHP 8.2
 - npm 
-- composer 
-
-
+- composer
+- 
 ##  Laravel + Tailwind Css Admin Project with 
 - login user 
 - logout user
