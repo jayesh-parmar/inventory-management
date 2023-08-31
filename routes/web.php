@@ -22,9 +22,6 @@ Route::get('/welcome', function () {
 Route::get('/', function () {
     return view('auth.login');
 });
-// Route::get('/brands', function () {
-//     return view('admin.pages.brands');
-// })->name('brands');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -38,9 +35,6 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
-//brand route
-//--------------
 Route::get('brands', [UserController::class,'index'])->name('brands');
 Route::post('brand',[UserController::class,'store'])->name('store_brand');
 Route::get('edit/{id}', [UserController::class, 'edit'])->name('edit');
