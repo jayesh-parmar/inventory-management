@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('color', [ColorController::class, 'index'])->name('color');
+Route::post('color', [ColorController::class, 'store'])->name('store-color');
+Route::get('color/edit/{id}', [ColorController::class, 'edit'])->name('color-edit');
+Route::post('color/update/{id}', [ColorController::class, 'update'])->name('update-color');
