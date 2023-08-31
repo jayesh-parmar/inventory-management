@@ -6,6 +6,7 @@ use Rector\Config\RectorConfig;
 use RectorLaravel\Rector\MethodCall\RedirectRouteToToRouteHelperRector;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
+use RectorLaravel\Set\LaravelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
@@ -21,6 +22,7 @@ return static function (RectorConfig $rectorConfig): void {
         SetList::DEAD_CODE,
         SetList::CODE_QUALITY,
         LevelSetList::UP_TO_PHP_82,
+        LaravelSetList::LARAVEL_100,
     ]);
 
     $rectorConfig->rule(RedirectRouteToToRouteHelperRector::class);
