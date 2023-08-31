@@ -24,8 +24,9 @@ class UserController extends Controller
         $request->validate([
             'brand_name' => 'required',
         ]);
+        $capitalizedString = ucfirst($request->brand_name);
         $data= new Brand;
-        $data->brand_name =$request->brand_name;
+        $data->brand_name = $capitalizedString;
         $data->save();
         return redirect()->route('brands')->with('success', $request->brand_name . 'New Brand successfully Added.');
     }
@@ -46,8 +47,9 @@ class UserController extends Controller
         $request->validate([
             'brand_name' => 'required',
         ]);
+        $capitalizedString = ucfirst($request->brand_name);
         $data= Brand::find($id);
-        $data->brand_name=$request->brand_name;
+        $data->brand_name=$capitalizedString;
         $data->save();
 
         return redirect('brands')->with('success', $request->brand_name.' Brand Name successfully Update.');
