@@ -31,7 +31,9 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('size', [SizeController::class, 'index'])->name('size');
-Route::post('size', [SizeController::class, 'store'])->name('store-size');
-Route::get('size/edit/{id}', [SizeController::class, 'edit'])->name('size-edit');
-Route::post('size/update/{id}', [SizeController::class, 'update'])->name('update-size');
+Route::controller(SizeController::class)->group(function () {
+    Route::get('fetch-size', 'index')->name('size');
+    Route::post('create-size', 'store')->name('store-size');
+    Route::get('size-edit/{id}', 'edit')->name('size-edit');
+    Route::post('size-update/{id}', 'update')->name('update-size');
+});
