@@ -35,9 +35,9 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('brands', [UserController::class,'index'])->name('brands');
-Route::post('brand',[UserController::class,'store'])->name('store_brand');
-Route::get('edit/{id}', [UserController::class, 'edit'])->name('edit');
-Route::post('update/{id}', [UserController::class, 'update'])->name('update_brand');
-
-
+Route::controller(UserController::class)->group(function () {
+    Route::get('fetch-brands', 'index')->name('brands');
+    Route::post('create-brand', 'store')->name('store_brand');
+    Route::get('edit-brand/{id}', 'edit')->name('edit');
+    Route::post('update-brand/{id}', 'update')->name('update_brand'); 
+});

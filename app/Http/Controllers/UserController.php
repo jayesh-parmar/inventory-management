@@ -17,28 +17,27 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'brand_name' => 'required',
+            'brand_name' => 'required|unique:brands,brand_name|max:255',
         ]);
-        $data= new Brand;
-        $data->brand_name =Str::ucfirst($request->brand_name);
-        $data->save();
+        Brand::create([
+            'brand_name' => $request->brand_name, 
+        ]);
         return redirect()->route('brands')->with('success', $request->brand_name . 'New Brand successfully Added.');
     }
    
     public function edit(string $id)
     {
-        $data= Brand::find($id);
-        return view('admin.pages.brands.update',['data'=>$data]);
+        $data = Brand::find($id);
+        return view('admin.pages.brands.update',['data' => $data]);
     }
 
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'brand_name' => 'required',
+            'brand_name' => 'required|unique:brands,brand_name|max:255',
         ]);
-    
-        $data= Brand::find($id);
-        $data->brand_name=Str::ucfirst($request->brand_name);
+        $data = Brand::find($id);
+        $data->brand_name = $request->brand_name;
         $data->save();
 
         return redirect('brands')->with('success', $request->brand_name.' Brand Name successfully Update.');
