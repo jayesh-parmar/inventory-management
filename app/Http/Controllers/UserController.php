@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+
 class UserController extends Controller
 {
     public function index()
@@ -24,7 +25,7 @@ class UserController extends Controller
         Brand::create([
             'brand_name' => $request->brand_name, 
         ]);
-        return redirect()->route('brand.brands')->with('success', 'New Brand Added successfully .');
+        return redirect()->route('brand.index')->with('success', 'New Brand Added successfully .');
     }
    
     public function edit(string $brandId)
@@ -41,6 +42,6 @@ class UserController extends Controller
         $brand = Brand::find($brandId);
         $brand->brand_name = $request->brand_name;
         $brand->save();
-        return redirect()->route('brand.brands')->with('success', ' Brand Updated successfully.');
+        return redirect()->route('brand.index')->with('success', ' Brand Updated successfully.');
     }  
 }

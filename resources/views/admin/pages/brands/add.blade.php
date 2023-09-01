@@ -15,7 +15,7 @@
                 @endif
 
                 <div class="buttons flex">
-                    <a class="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-10" href="{{route('brand.brands')}} ">Cancel</a>
+                    <a class="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-10" href="{{route('brand.index')}} ">Cancel</a>
                     <button>
                         <div class="btn border border-gray-300 p-2 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">Add</div>
                     </button>

@@ -28,11 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::controller(UserController::class)->middleware('auth')->name('brand.')->group(function () {
-    Route::get('brands', 'index')->name('brands');
-    Route::get('brands-add', 'addBrand')->name('add');
-    Route::post('brand-create', 'store')->name('store');
-    Route::get('edit-brand/{brandId}', 'edit')->name('edit');
-    Route::post('update-brand/{brandId}', 'update')->name('update');
+    Route::get('brands', 'index')->name('index');
+    Route::get('brands/create', 'addBrand')->name('create');
+    Route::post('brands', 'store')->name('store');
+    Route::get('brands/{brandId}/edit', 'edit')->name('edit');
+    Route::post('brands/{brandId}/update', 'update')->name('update');
 });
 
 require __DIR__.'/auth.php';
