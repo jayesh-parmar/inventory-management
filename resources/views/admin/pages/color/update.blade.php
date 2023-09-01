@@ -1,5 +1,5 @@
 @include('admin.layouts.main')
-        <div class="heading text-center font-bold text-2xl m-5 text-gray-800 title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none ">Update Color Name</div>
+        <div class="heading text-center font-bold mt-4  text-2xl  text-gray-800 title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none ">Update Color Name</div>
         <style>
             body {
                 background: white !important;
@@ -9,17 +9,15 @@
             @csrf
             <div class="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
                 <input 
-
                     class="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" 
-                    spellcheck="false" 
-                    placeholder="Title" 
+                    spellcheck="false"  
                     value="{{$data->color_name}}" 
                     name="color_name" 
                     type="text"
-                    >
+                />
 
                 @if($errors->has('color_name'))
-                    <div class="font-bold text-white">{{ $errors->first('color_name') }}</div>
+                <div class="font-bold text-white">{{ $errors->first('color_name') }}</div>
                 @endif
 
                 <div class="buttons flex">
@@ -31,6 +29,6 @@
             </div>
         </form>
       </div>
-    </div>
+   </div>
   </body>
 </html>

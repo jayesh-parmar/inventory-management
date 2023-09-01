@@ -31,7 +31,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('color', [ColorController::class, 'index'])->name('color');
-Route::post('color', [ColorController::class, 'store'])->name('store-color');
-Route::get('color/edit/{id}', [ColorController::class, 'edit'])->name('color-edit');
-Route::post('color/update/{id}', [ColorController::class, 'update'])->name('update-color');
+Route::controller(ColorController::class)->group(function () {
+    Route::get('fetch-color', 'index')->name('color');
+    Route::post('create-color', 'store')->name('store-color');
+    Route::get('color-edit/{id}', 'edit')->name('color-edit');
+    Route::post('color-update/{id}', 'update')->name('update-color');
+});
+
