@@ -40,6 +40,6 @@ class UserController extends Controller
         $data->brand_name = $request->brand_name;
         $data->save();
 
-        return redirect('brands')->with('success', $request->brand_name.' Brand Name successfully Update.');
+        return redirect()->route('brands')->with('success', $request->brand_name.' Brand Name successfully Update.');
     }  
 }
