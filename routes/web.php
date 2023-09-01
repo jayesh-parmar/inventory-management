@@ -36,4 +36,4 @@ Route::controller(UserController::class)->name('brand.')->group(function () {
     Route::post('brand-create', 'store')->name('store');
     Route::get('edit-brand/{brandId}', 'edit')->name('edit');
     Route::post('update-brand/{brandId}', 'update')->name('update'); 
-});
+})->middleware(['auth', 'verified'])->name('dashboard');
