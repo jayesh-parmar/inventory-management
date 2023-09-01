@@ -11,7 +11,6 @@
     </script>
     <script src="{{url('public/assets/js/init-alpine.js')}}">
     </script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
     <script src="{{url('public/assets/js/charts-lines.js')}}" defer>

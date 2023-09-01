@@ -4,12 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\UuidTrait;
-
-
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 class Brand extends Model
 {
-    use HasFactory, UuidTrait;
+    use HasFactory,HasUuids;
 
     protected $fillable = [
         'brand_name',

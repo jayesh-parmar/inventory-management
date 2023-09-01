@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-
 class UserController extends Controller
 {
     public function index()
     {
-        $data = Brand::all();
-        return view('admin.pages.brands.brands', ['data' => $data]);
+        $brand = Brand::paginate(10);
+        return view('admin.pages.brands.brands', ['brands' => $brand]);
+    }
+    public function addBrand()
+    {
+        return view('admin.pages.brands.add');
     }
 
     public function store(Request $request)
@@ -22,24 +24,23 @@ class UserController extends Controller
         Brand::create([
             'brand_name' => $request->brand_name, 
         ]);
-        return redirect()->route('brands')->with('success', $request->brand_name . 'New Brand successfully Added.');
+        return redirect()->route('brand.brands')->with('success', 'New Brand Added successfully .');
     }
    
-    public function edit(string $id)
+    public function edit(string $brandId)
     {
-        $data = Brand::find($id);
-        return view('admin.pages.brands.update',['data' => $data]);
+        $brand = Brand::find($brandId);
+        return view('admin.pages.brands.update',['brands' => $brand]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $brandId)
     {
         $request->validate([
             'brand_name' => 'required|unique:brands,brand_name|max:255',
         ]);
-        $data = Brand::find($id);
-        $data->brand_name = $request->brand_name;
-        $data->save();
-
-        return redirect()->route('brands')->with('success', $request->brand_name.' Brand Name successfully Update.');
+        $brand = Brand::find($brandId);
+        $brand->brand_name = $request->brand_name;
+        $brand->save();
+        return redirect()->route('brand.brands')->with('success', ' Brand Updated successfully.');
     }  
 }

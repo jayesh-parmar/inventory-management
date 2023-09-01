@@ -35,9 +35,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::controller(UserController::class)->group(function () {
-    Route::get('fetch-brands', 'index')->name('brands');
-    Route::post('create-brand', 'store')->name('store_brand');
-    Route::get('edit-brand/{id}', 'edit')->name('edit');
-    Route::post('update-brand/{id}', 'update')->name('update_brand'); 
+Route::controller(UserController::class)->name('brand.')->group(function () {
+    Route::get('brands', 'index')->name('brands');
+    Route::get('brands-add', 'addBrand')->name('add');
+    Route::post('brand-create', 'store')->name('store');
+    Route::get('edit-brand/{brandId}', 'edit')->name('edit');
+    Route::post('update-brand/{brandId}', 'update')->name('update'); 
 });
