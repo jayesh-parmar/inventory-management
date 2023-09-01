@@ -7,6 +7,8 @@ use RectorLaravel\Rector\MethodCall\RedirectRouteToToRouteHelperRector;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
 use RectorLaravel\Set\LaravelSetList;
+use Rector\PHPUnit\Set\PHPUnitSetList;
+
 
 
 return static function (RectorConfig $rectorConfig): void {
@@ -17,6 +19,7 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__ . '/public',
         __DIR__ . '/resources',
         __DIR__ . '/routes',
+        __DIR__ . '/rector.php',
     ]);
 
     $rectorConfig->sets([
@@ -44,8 +47,12 @@ return static function (RectorConfig $rectorConfig): void {
         SetList::INSTANCEOF,
         SetList::GMAGICK_TO_IMAGICK,
         SetList::CODING_STYLE,
-        SetList::STRICT_BOOLEANS,    
+        SetList::STRICT_BOOLEANS,
+        PHPUnitSetList::PHPUNIT_100,
+        PHPUnitSetList::PHPUNIT_CODE_QUALITY,
+   
     ]);
+    $rectorConfig->importNames();
 
     $rectorConfig->rule(RedirectRouteToToRouteHelperRector::class);
 };
