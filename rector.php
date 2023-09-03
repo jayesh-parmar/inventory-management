@@ -34,7 +34,6 @@ return static function (RectorConfig $rectorConfig): void {
         SetList::PHP_74,
         SetList::PHP_80,
         SetList::PHP_81,
-        SetList::PHP_82,
         SetList::NAMING,
         SetList::PHP_52,
         SetList::PHP_53,
@@ -46,11 +45,9 @@ return static function (RectorConfig $rectorConfig): void {
         SetList::EARLY_RETURN,
         SetList::INSTANCEOF,
         SetList::GMAGICK_TO_IMAGICK,
-        SetList::CODING_STYLE,
-        SetList::STRICT_BOOLEANS,
-        PHPUnitSetList::PHPUNIT_100,
-        PHPUnitSetList::PHPUNIT_CODE_QUALITY,
-   
+        LaravelSetList::ARRAY_STR_FUNCTIONS_TO_STATIC_CALL,
+        LaravelSetList::LARAVEL_CODE_QUALITY,
+        LaravelSetList::LARAVEL_LEGACY_FACTORIES_TO_CLASSES,
     ]);
     $rectorConfig->importNames();
 
