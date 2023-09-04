@@ -9,8 +9,12 @@ class ColorController extends Controller
 {
     public function index()
     {
-        $data = Color::all();
-        return view('admin.pages.color.color', ['data' => $data]);
+        $color = Color::paginate(10);
+        return view('admin.pages.color.color', ['colors' => $color]);
+    }
+    public function addColor()
+    {
+        return view('admin.pages.color.add');
     }
 
     public function store(Request $request)
@@ -21,23 +25,23 @@ class ColorController extends Controller
         Color::create([
             'color_name' => $request->color_name,
         ]);
-        return redirect()->route('color')->with('success', $request->color_name . ' New Color successfully Added.');
+        return redirect()->route('color.index')->with('success',  ' New Color Added successfully ');
     }
 
-    public function edit(string $id)
+    public function edit(string $colorId)
     {
-        $data = Color::find($id);
-        return view('admin.pages.color.update', ['data' => $data]);
+        $color = Color::find($colorId);
+        return view('admin.pages.color.update', ['color' => $color]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $colorId)
     {
         $request->validate([
             'color_name' => 'required|unique:colors,color_name|max:255',
         ]);
-        $data = Color::find($id);
-        $data->color_name = $request->color_name;
-        $data->save();
-        return redirect()->route('color')->with('success', $request->color_name .' Color Name successfully Update.');
+        $color = Color::find($colorId);
+        $color->color_name = $request->color_name;
+        $color->save();
+        return redirect()->route('color.index')->with('success', ' Color Update successfully.');
     }  
 }

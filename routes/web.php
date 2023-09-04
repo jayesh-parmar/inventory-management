@@ -31,10 +31,11 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::controller(ColorController::class)->group(function () {
-    Route::get('fetch-color', 'index')->name('color');
-    Route::post('create-color', 'store')->name('store-color');
-    Route::get('color-edit/{id}', 'edit')->name('color-edit');
-    Route::post('color-update/{id}', 'update')->name('update-color');
+Route::controller(ColorController::class)->name('color.')->group(function () {
+    Route::get('colors', 'index')->name('index');
+    Route::get('color/create','addColor')->name('add');
+    Route::post('colors', 'store')->name('store');
+    Route::get('color/{colorId}/edit', 'edit')->name('edit');
+    Route::post('color/{colorId}/update', 'update')->name('update');
 });
 
