@@ -10,6 +10,6 @@ class Brand extends Model
     use HasFactory,HasUuids;
 
     protected $fillable = [
-        'brand_name',
+        'name',
     ];
 }

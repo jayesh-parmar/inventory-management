@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class BrandController extends Controller
 {
     public function index()
     {
@@ -20,10 +20,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'brand_name' => 'required|unique:brands,brand_name|max:255',
+            'name' => 'required|unique:brands,name|max:255',
         ]);
         Brand::create([
-            'brand_name' => $request->brand_name, 
+            'name' => $request->name, 
         ]);
         return redirect()->route('brand.index')->with('success', 'New Brand Added successfully .');
     }
@@ -36,13 +36,11 @@ class UserController extends Controller
 
     public function update(Request $request, string $brandId)
     {
+        $request->validate([
+            'name' => 'required|unique:brands,name,'.$brandId.'|max:255',
+        ]);
         $brand = Brand::find($brandId);
-        if($brand->brand_name !== $request->brand_name ){
-            $request->validate([
-                'brand_name' => 'required|unique:brands,brand_name|max:255',
-            ]);
-        }
-        $brand->brand_name = $request->brand_name;
+        $brand->name = $request->name;
         $brand->save();
         return redirect()->route('brand.index')->with('success', ' Brand Updated successfully.');
     }  
