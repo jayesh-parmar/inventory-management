@@ -36,10 +36,12 @@ class UserController extends Controller
 
     public function update(Request $request, string $brandId)
     {
-        $request->validate([
-            'brand_name' => 'required|unique:brands,brand_name|max:255',
-        ]);
         $brand = Brand::find($brandId);
+        if($brand->brand_name !== $request->brand_name ){
+            $request->validate([
+                'brand_name' => 'required|unique:brands,brand_name|max:255',
+            ]);
+        }
         $brand->brand_name = $request->brand_name;
         $brand->save();
         return redirect()->route('brand.index')->with('success', ' Brand Updated successfully.');
