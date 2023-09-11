@@ -1,22 +1,28 @@
-@include('admin.layouts.main')
-        <div class="heading text-center font-bold text-2xl m-5 text-gray-800 title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none ">Update Brand </div>
+@extends('admin.layouts.main')
+  @section('content')
+    <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+      Update Brand
+    </h4>
         <form action="{{route('brand.update',$brands->id)}}" method="post">
-            @csrf
-            <div class="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
-                <x-input placeholder="" name="brand_name" type="text" value="{{$brands->brand_name}}" />
-                @if($errors->has('brand_name'))
-                <div class="font-bold text-white">{{ $errors->first('brand_name') }}</div>
-                @endif
-
-                <div class="buttons flex">
-                    <a class="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-10" href="{{route('brand.index')}} ">Cancel</a>
-                    <button>
-                        <div class="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">Update</div>
-                    </button>
-                </div>
+          @csrf
+          <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+            <label class="block text-sm">
+              <span class="text-gray-700 dark:text-gray-400">Name</span>
+              <x-input 
+                  placeholder="" 
+                  name="brand_name" 
+                  type="text" 
+                  value="{{$brands->brand_name}}" 
+              />
+            </label>
+            @if($errors->has('brand_name'))
+              <span class="text-gray-700 dark:text-gray-400">{{ $errors->first('brand_name') }}</span>
+            @endif
+            <div class="mt-4">
+              <button class="px-4 py-2 bt-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                Update
+              </button>
             </div>
+          </div>
         </form>
-      </div>
-    </div>
-  </body>
-</html>
+@endsection

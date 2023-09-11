@@ -1,4 +1,4 @@
-    <input class="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none"  
+    <input   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
         placeholder="{{$placeholder}}" 
         name="{{$name}}" 
         type="{{$type}}" 
