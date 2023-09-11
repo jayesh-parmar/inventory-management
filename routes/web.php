@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -27,5 +27,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::controller(BrandController::class)->middleware('auth')->name('brand.')->group(function () {
+    Route::get('brands', 'index')->name('index');
+    Route::get('brands/create', 'addBrand')->name('create');
+    Route::post('brands', 'store')->name('store');
+    Route::get('brands/{brandId}/edit', 'edit')->name('edit');
+    Route::post('brands/{brandId}/update', 'update')->name('update');
+});
 
 require __DIR__.'/auth.php';
+
