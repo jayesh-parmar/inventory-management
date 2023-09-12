@@ -42,6 +42,6 @@ class BrandController extends Controller
         $brand = Brand::find($brandId);
         $brand->name = $request->name;
         $brand->save();
-        return redirect()->route('brand.index')->with('success', ' Brand Updated successfully.');
+        return redirect()->route('brand.index')->with('success', 'Brand Updated successfully.');
     }  
 }
