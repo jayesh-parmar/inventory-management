@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SizeController;
 use Illuminate\Support\Facades\Route;
@@ -14,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -28,12 +28,20 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-require __DIR__.'/auth.php';
-
-Route::controller(SizeController::class)->group(function () {
-    Route::get('fetch-size', 'index')->name('size');
-    Route::post('create-size', 'store')->name('store-size');
-    Route::get('size-edit/{id}', 'edit')->name('size-edit');
-    Route::post('size-update/{id}', 'update')->name('update-size');
+Route::controller(BrandController::class)->middleware('auth')->name('brand.')->group(function () {
+    Route::get('brands', 'index')->name('index');
+    Route::get('brands/create', 'addBrand')->name('create');
+    Route::post('brands', 'store')->name('store');
+    Route::get('brands/{brandId}/edit', 'edit')->name('edit');
+    Route::post('brands/{brandId}/update', 'update')->name('update');
 });
+
+Route::controller(SizeController::class)->middleware('auth')->name('size.')->group(function () {
+    Route::get('sizes', 'index')->name('index');
+    Route::get('sizes/create', 'addSize')->name('create');
+    Route::post('sizes', 'store')->name('store');
+    Route::get('sizes/{sizeId}/edit', 'edit')->name('edit');
+    Route::post('sizes/{sizeId}/update', 'update')->name('update');
+});
+
+require __DIR__ . '/auth.php';

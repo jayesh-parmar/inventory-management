@@ -9,36 +9,42 @@ class SizeController extends Controller
 {
     public function index()
     {
-        $data = Size::all();
-        return view('admin.pages.size.size', ['data' => $data]);
+        $size = Size::paginate(10);
+        return view('admin.pages.size.index', ['sizes' => $size]);
+    }
+
+    public function addSize()
+    {
+        return view('admin.pages.size.add');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'size_name' => 'required|unique:sizes,size_name|max:255',
+            'name' => 'required|unique:sizes,name|max:255',
         ]);
+        
         Size::create([
-            'size_name' => $request->size_name,
+            'name' => $request->name,
         ]);
-        return redirect()->route('size')->with('success', $request->size_name . ' New Size successfully Added.');
+        return redirect()->route('size.index')->with('success', 'New Size Added successfully .');
     }
 
-    public function edit(string $id)
+    public function edit(string $sizeId)
     {
-        $data = Size::find($id);
-        return view('admin.pages.size.update', ['data' => $data]);
+        $size = Size::find($sizeId);
+        return view('admin.pages.size.update', ['size' => $size]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $sizeId)
     {
         $request->validate([
-            'size_name' => 'required|unique:sizes,size_name|max:255',
+            'name' => 'required|unique:sizes,name,'.$sizeId.'|max:255',
         ]);
 
-        $data = Size::find($id);
-        $data->size_name = $request->size_name;
-        $data->save();
-        return redirect()->route('size')->with('success', $request->size_name . ' Size successfully Update.');
+        $size = Size::find($sizeId);
+        $size->name = $request->name;
+        $size->save();
+        return redirect()->route('size.index')->with('success', 'Size Update successfully.');
     } 
 }
