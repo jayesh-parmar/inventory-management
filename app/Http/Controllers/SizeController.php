@@ -9,8 +9,8 @@ class SizeController extends Controller
 {
     public function index()
     {
-        $size = Size::paginate(10);
-        return view('admin.pages.size.index', ['sizes' => $size]);
+        $sizes = Size::paginate(10);
+        return view('admin.pages.size.index', ['sizes' => $sizes]);
     }
 
     public function add()
@@ -28,13 +28,13 @@ class SizeController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('size.index')->with('success', 'New Size Added successfully .');
+        return redirect()->route('size.index')->with('success', 'Size Added successfully.');
     }
 
     public function edit(string $sizeId)
     {
-        $size = Size::find($sizeId);
-        return view('admin.pages.size.update', ['size' => $size]);
+        $sizes = Size::find($sizeId);
+        return view('admin.pages.size.update', ['size' => $sizes]);
     }
 
     public function update(Request $request, string $sizeId)
@@ -43,9 +43,9 @@ class SizeController extends Controller
             'name' => 'required|unique:sizes,name,'.$sizeId.'|max:255',
         ]);
 
-        $size = Size::find($sizeId);
-        $size->name = $request->name;
-        $size->save();
+        $sizes = Size::find($sizeId);
+        $sizes->name = $request->name;
+        $sizes->save();
         
         return redirect()->route('size.index')->with('success', 'Size Update successfully.');
     } 
