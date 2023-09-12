@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\ColorController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -35,5 +35,15 @@ Route::controller(BrandController::class)->middleware('auth')->name('brand.')->g
     Route::post('brands/{brandId}/update', 'update')->name('update');
 });
 
-require __DIR__.'/auth.php';
 
+
+Route::controller(ColorController::class)->middleware('auth')->name('color.')->group(function () {
+    Route::get('colors', 'index')->name('index');
+    Route::get('colors/create','addColor')->name('create');
+    Route::post('colors', 'store')->name('store');
+    Route::get('colors/{colorId}/edit', 'edit')->name('edit');
+    Route::post('colors/{colorId}/update', 'update')->name('update');
+});
+
+
+require __DIR__ . '/auth.php';
