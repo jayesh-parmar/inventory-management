@@ -2,6 +2,7 @@
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SizeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,9 +34,14 @@ Route::controller(BrandController::class)->middleware('auth')->name('brand.')->g
     Route::post('brands', 'store')->name('store');
     Route::get('brands/{brandId}/edit', 'edit')->name('edit');
     Route::post('brands/{brandId}/update', 'update')->name('update');
+
+Route::controller(SizeController::class)->middleware('auth')->name('size.')->group(function () {
+    Route::get('sizes', 'index')->name('index');
+    Route::get('sizes/create', 'add')->name('create');
+    Route::post('sizes', 'store')->name('store');
+    Route::get('sizes/{sizeId}/edit', 'edit')->name('edit');
+    Route::post('sizes/{sizeId}/update', 'update')->name('update');
 });
-
-
 
 Route::controller(ColorController::class)->middleware('auth')->name('color.')->group(function () {
     Route::get('colors', 'index')->name('index');
@@ -44,6 +50,5 @@ Route::controller(ColorController::class)->middleware('auth')->name('color.')->g
     Route::get('colors/{colorId}/edit', 'edit')->name('edit');
     Route::post('colors/{colorId}/update', 'update')->name('update');
 });
-
 
 require __DIR__ . '/auth.php';
