@@ -14,7 +14,7 @@
             <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Name</span>
                 <x-input 
-                    placeholder="Enter Brand Name" 
+                    placeholder="Enter Size" 
                     name="name" 
                     type="text" 
                     value="" 
