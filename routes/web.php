@@ -38,7 +38,7 @@ Route::controller(BrandController::class)->middleware('auth')->name('brand.')->g
 
 Route::controller(SizeController::class)->middleware('auth')->name('size.')->group(function () {
     Route::get('sizes', 'index')->name('index');
-    Route::get('sizes/create', 'addSize')->name('create');
+    Route::get('sizes/create', 'add')->name('create');
     Route::post('sizes', 'store')->name('store');
     Route::get('sizes/{sizeId}/edit', 'edit')->name('edit');
     Route::post('sizes/{sizeId}/update', 'update')->name('update');

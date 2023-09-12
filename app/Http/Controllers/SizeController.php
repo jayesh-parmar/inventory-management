@@ -13,7 +13,7 @@ class SizeController extends Controller
         return view('admin.pages.size.index', ['sizes' => $size]);
     }
 
-    public function addSize()
+    public function add()
     {
         return view('admin.pages.size.add');
     }
@@ -23,10 +23,11 @@ class SizeController extends Controller
         $request->validate([
             'name' => 'required|unique:sizes,name|max:255',
         ]);
-        
+
         Size::create([
             'name' => $request->name,
         ]);
+
         return redirect()->route('size.index')->with('success', 'New Size Added successfully .');
     }
 
@@ -45,6 +46,7 @@ class SizeController extends Controller
         $size = Size::find($sizeId);
         $size->name = $request->name;
         $size->save();
+        
         return redirect()->route('size.index')->with('success', 'Size Update successfully.');
     } 
 }
