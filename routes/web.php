@@ -39,10 +39,10 @@ Route::controller(BrandController::class)->middleware('auth')->name('brand.')->g
 
 Route::controller(ColorController::class)->middleware('auth')->name('color.')->group(function () {
     Route::get('colors', 'index')->name('index');
-    Route::get('color/create','addColor')->name('create');
+    Route::get('colors/create','addColor')->name('create');
     Route::post('colors', 'store')->name('store');
-    Route::get('color/{colorId}/edit', 'edit')->name('edit');
-    Route::post('color/{colorId}/update', 'update')->name('update');
+    Route::get('colors/{colorId}/edit', 'edit')->name('edit');
+    Route::post('colors/{colorId}/update', 'update')->name('update');
 });
 
 

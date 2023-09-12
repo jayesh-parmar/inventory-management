@@ -10,8 +10,10 @@ class ColorController extends Controller
     public function index()
     {
         $color = Color::paginate(10);
-        return view('admin.pages.color.color', ['colors' => $color]);
+    
+        return view('admin.pages.color.index', ['colors' => $color]);
     }
+
     public function addColor()
     {
         return view('admin.pages.color.add');
@@ -22,15 +24,18 @@ class ColorController extends Controller
         $request->validate([
             'name' => 'required|unique:colors,name|max:255',
         ]);
+
         Color::create([
             'name' => $request->name,
         ]);
-        return redirect()->route('color.index')->with('success',  ' New Color Added successfully ');
+
+        return redirect()->route('color.index')->with('success',  'New Color Added successfully ');
     }
 
     public function edit(string $colorId)
     {
         $color = Color::find($colorId);
+
         return view('admin.pages.color.update', ['color' => $color]);
     }
 
@@ -39,9 +44,11 @@ class ColorController extends Controller
         $request->validate([
             'name' => 'required|unique:colors,name,'.$colorId.'|max:255',
         ]);
+
         $color = Color::find($colorId);
         $color->name = $request->name;
         $color->save();
-        return redirect()->route('color.index')->with('success', ' Color Update successfully.');
+
+        return redirect()->route('color.index')->with('success', 'Color Update successfully.');
     }  
 }
