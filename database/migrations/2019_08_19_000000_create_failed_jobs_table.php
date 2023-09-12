@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('failed_jobs', static function (Blueprint $blueprint) : void {
@@ -21,10 +18,6 @@ return new class extends Migration
             $blueprint->timestamp('failed_at')->useCurrent();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('failed_jobs');

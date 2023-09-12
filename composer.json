@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "symfony/dependency-injection": "^6.3"
+        "livewire/livewire": "^3.0"
     },
     "require-dev": {
         "driftingly/rector-laravel": "^0.24.1",

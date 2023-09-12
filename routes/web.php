@@ -1,9 +1,10 @@
 <?php
-
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', static fn() => view('auth.login'));
+Route::get('/', function () {
+    return view('auth.login');
+});
+
 
 Route::get('/dashboard', static fn() => view('dashboard'))->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -27,5 +33,23 @@ Route::middleware('auth')->group(static function () : void {
     Route::patch('/profile', static fn(ProfileUpdateRequest $profileUpdateRequest): RedirectResponse => (new ProfileController())->update($profileUpdateRequest))->name('profile.update');
     Route::delete('/profile', static fn(Request $request): RedirectResponse => (new ProfileController())->destroy($request))->name('profile.destroy');
 });
+Route::controller(BrandController::class)->middleware('auth')->name('brand.')->group(function () {
+    Route::get('brands', 'index')->name('index');
+    Route::get('brands/create', 'addBrand')->name('create');
+    Route::post('brands', 'store')->name('store');
+    Route::get('brands/{brandId}/edit', 'edit')->name('edit');
+    Route::post('brands/{brandId}/update', 'update')->name('update');
+});
 
-require __DIR__.'/auth.php';
+
+
+Route::controller(ColorController::class)->middleware('auth')->name('color.')->group(function () {
+    Route::get('colors', 'index')->name('index');
+    Route::get('colors/create','addColor')->name('create');
+    Route::post('colors', 'store')->name('store');
+    Route::get('colors/{colorId}/edit', 'edit')->name('edit');
+    Route::post('colors/{colorId}/update', 'update')->name('update');
+});
+
+
+require __DIR__ . '/auth.php';
