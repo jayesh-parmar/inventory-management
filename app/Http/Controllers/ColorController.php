@@ -20,10 +20,10 @@ class ColorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'color_name' => 'required|unique:colors,color_name|max:255',
+            'name' => 'required|unique:colors,name|max:255',
         ]);
         Color::create([
-            'color_name' => $request->color_name,
+            'name' => $request->name,
         ]);
         return redirect()->route('color.index')->with('success',  ' New Color Added successfully ');
     }
@@ -37,10 +37,10 @@ class ColorController extends Controller
     public function update(Request $request, string $colorId)
     {
         $request->validate([
-            'color_name' => 'required|unique:colors,color_name|max:255',
+            'name' => 'required|unique:colors,name,'.$colorId.'|max:255',
         ]);
         $color = Color::find($colorId);
-        $color->color_name = $request->color_name;
+        $color->name = $request->name;
         $color->save();
         return redirect()->route('color.index')->with('success', ' Color Update successfully.');
     }  
