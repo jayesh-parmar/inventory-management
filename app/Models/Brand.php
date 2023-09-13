@@ -9,7 +9,13 @@ class Brand extends Model
 {
     use HasFactory,HasUuids;
 
+   protected $primaryKey = 'id';
     protected $fillable = [
         'name',
     ];
+
+    public function product()
+    {
+        return $this->hasMany(Product::class, 'id');
+    }
 }
