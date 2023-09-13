@@ -12,11 +12,6 @@
             </button>
         </a>
     </div>
-    @if(session('success'))
-    <div class=" text-white ">
-        {{ session('success') }}
-    </div>
-    @endif
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto  ">
             <table class="w-full border-collapse ">

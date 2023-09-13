@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductValidation;
 use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Product;
@@ -12,23 +13,24 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with(['brand','color','size'])->paginate(10);
-    
-        return view('admin.pages.product.index', ['products' => $products]);
+        $products = Product::with([
+            'brand:id,name',   
+            'color:id,name',   
+            'size:id,name',    
+        ])->paginate(10);
+
+        return view('admin.pages.product.index', compact('products'));
     }
     public function add()
     {
-        $brands=Brand::get();
-        $colors = Color::get();
-        $sizes = Size::get();
+        $brands = Brand::select('id', 'name')->get();
+        $colors = Color::select('id', 'name')->get();
+        $sizes = Size::select('id', 'name')->get();
+
         return view('admin.pages.product.add',['brands'=>$brands,'colors'=>$colors,'sizes'=>$sizes]);
     }
-    public function store(Request $request)
+    public function store( ProductValidation $request )
     {
-        $request->validate([
-            'name' => 'required|unique:products,name|max:255',
-        ]);
-
         Product::create([
             'name' => $request->name,
             'brand_id' => $request->brand,
@@ -41,20 +43,16 @@ class ProductController extends Controller
     }
     public function edit(string $productId)
     {
-        $brands = Brand::get();
-        $colors = Color::get();
-        $sizes = Size::get();
-        $products = Product::find($productId);
+        $brands = Brand::select('id', 'name')->get();
+        $colors = Color::select('id', 'name')->get();
+        $sizes = Size::select('id', 'name')->get();
+        $product = Product::find($productId);
         
-        return view('admin.pages.product.update', ['product' => $products, 'brands' => $brands, 'colors' => $colors, 'sizes' => $sizes]);
+        return view('admin.pages.product.update', ['product' => $product, 'brands' => $brands, 'colors' => $colors, 'sizes' => $sizes]);
     }
 
-    public function update(Request $request, string $productId)
+    public function update(ProductValidation $request, string $productId)
     {
-        $request->validate([
-            'name' => 'required|unique:brands,name,'. $productId .'|max:255',
-        ]);
-
         $product = Product::find($productId);
         $product->name = $request->name;
         $product->brand_id = $request->brand;
