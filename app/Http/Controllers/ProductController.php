@@ -7,8 +7,6 @@ use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Size;
-use Illuminate\Http\Request;
-
 class ProductController extends Controller
 {
     public function index()
@@ -27,9 +25,9 @@ class ProductController extends Controller
         $colors = Color::select('id', 'name')->get();
         $sizes = Size::select('id', 'name')->get();
 
-        return view('admin.pages.product.add',['brands'=>$brands,'colors'=>$colors,'sizes'=>$sizes]);
+        return view('admin.pages.product.form',['brands'=>$brands,'colors'=>$colors,'sizes'=>$sizes]);
     }
-    public function store( ProductValidation $request )
+    public function store( ProductValidation $request)
     {
         Product::create([
             'name' => $request->name,
@@ -38,7 +36,7 @@ class ProductController extends Controller
             'size_id'=>$request->size,
             'status'=>$request->status
         ]);
-
+    
         return redirect()->route('product.index')->with('success',  'Product Added successfully ');
     }
     public function edit(string $productId)
@@ -48,19 +46,22 @@ class ProductController extends Controller
         $sizes = Size::select('id', 'name')->get();
         $product = Product::find($productId);
         
-        return view('admin.pages.product.update', ['product' => $product, 'brands' => $brands, 'colors' => $colors, 'sizes' => $sizes]);
+        return view('admin.pages.product.form', ['product' => $product ,'brands' => $brands, 'colors' => $colors, 'sizes' => $sizes]);
     }
 
     public function update(ProductValidation $request, string $productId)
     {
         $product = Product::find($productId);
-        $product->name = $request->name;
-        $product->brand_id = $request->brand;
-        $product->color_id = $request->color;
-        $product->size_id = $request->size;
-        $product->status = $request->status;
-        $product->save();
+        
+        $product->update([
+            'name' => $request->name,
+            'brand_id' => $request->brand,
+            'color_id' => $request->color,
+            'size_id' => $request->size,
+            'status' => $request->status,
+        ]);
 
         return redirect()->route('product.index')->with('success', 'Product Updated successfully.');
-    }  
+    }
+
 }

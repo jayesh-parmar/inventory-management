@@ -12,12 +12,18 @@ class ProductValidation extends FormRequest
     }
     public function rules(): array
     {
-        return [
-            'name' => ['required', 'unique:products,name,'.$this->productId. 'max:255'],
+        $rules= [
+            'name' => ['required', 'unique:products,name,','max:255'],
             'brand' => ['required', 'max:255'],
             'color' => ['required', 'max:255'],
             'size' => ['required', 'max:255'],
-            'status' => ['required', 'max:255']
+            'status' => ['required', 'max:255'],
         ];
+        if ($this->isMethod('PUT')) {
+           $rules = [
+                'name' => 'required','unique:products,name,' . $this->productId . 'max:255'
+           ];    
+        }
+        return $rules;
     }
 }
