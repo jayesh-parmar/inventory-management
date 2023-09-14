@@ -14,9 +14,9 @@ class ProductValidation extends FormRequest
     {
         $rules= [
             'name' => ['required', 'unique:products,name,','max:255'],
-            'brand' => ['required', 'max:255'],
-            'color' => ['required', 'max:255'],
-            'size' => ['required', 'max:255'],
+            'brand_id' => ['required', 'max:255'],
+            'color_id' => ['required', 'max:255'],
+            'size_id' => ['required', 'max:255'],
             'status' => ['required', 'max:255'],
         ];
         if ($this->isMethod('PUT')) {

@@ -12,28 +12,24 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with([
-            'brand:id,name',   
-            'color:id,name',   
-            'size:id,name',    
-        ])->paginate(10);
-
+            'brand',   
+            'color',   
+            'size',    
+        ])->select('id','name','brand_id','color_id','size_id','status')->paginate(10);
+          
         return view('admin.pages.product.index', compact('products'));
     }
     public function add()
-    {
-        $brands = Brand::select('id', 'name')->get();
-        $colors = Color::select('id', 'name')->get();
-        $sizes = Size::select('id', 'name')->get();
-
-        return view('admin.pages.product.form',['brands'=>$brands,'colors'=>$colors,'sizes'=>$sizes]);
+    {        
+        return view('admin.pages.product.form');
     }
     public function store( ProductValidation $request)
     {
         Product::create([
             'name' => $request->name,
-            'brand_id' => $request->brand,
-            'color_id' =>$request->color,
-            'size_id'=>$request->size,
+            'brand_id' => $request->brand_id,
+            'color_id' =>$request->color_id,
+            'size_id'=>$request->size_id,
             'status'=>$request->status
         ]);
     
@@ -41,12 +37,9 @@ class ProductController extends Controller
     }
     public function edit(string $productId)
     {
-        $brands = Brand::select('id', 'name')->get();
-        $colors = Color::select('id', 'name')->get();
-        $sizes = Size::select('id', 'name')->get();
         $product = Product::find($productId);
-        
-        return view('admin.pages.product.form', ['product' => $product ,'brands' => $brands, 'colors' => $colors, 'sizes' => $sizes]);
+
+        return view('admin.pages.product.form', compact('product'));
     }
 
     public function update(ProductValidation $request, string $productId)
@@ -55,13 +48,12 @@ class ProductController extends Controller
         
         $product->update([
             'name' => $request->name,
-            'brand_id' => $request->brand,
-            'color_id' => $request->color,
-            'size_id' => $request->size,
+            'brand_id' => $request->brand_id,
+            'color_id' => $request->color_id,
+            'size_id' => $request->size_id,
             'status' => $request->status,
         ]);
 
         return redirect()->route('product.index')->with('success', 'Product Updated successfully.');
     }
-
 }
