@@ -58,7 +58,7 @@ Route::controller(ProductController::class)->middleware('auth')->name('product.'
     Route::get('products/create', 'add')->name('create');
     Route::post('product', 'store')->name('store');
     Route::get('products/{productId}/edit', 'edit')->name('edit');
-    Route::put('products/{productId}/update', 'update')->name('update');
+    Route::put('products/{product}/update', 'update')->name('update');
     
 });
 

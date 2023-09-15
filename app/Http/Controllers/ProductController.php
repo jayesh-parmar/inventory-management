@@ -6,16 +6,15 @@ use App\Http\Requests\ProductValidation;
 use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Product;
-use App\Models\Size;
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with([
+        $products = Product::select('id', 'name', 'brand_id', 'color_id', 'size_id', 'status')->with([
             'brand',   
             'color',   
             'size',    
-        ])->select('id','name','brand_id','color_id','size_id','status')->paginate(10);
+        ])->paginate(10);
           
         return view('admin.pages.product.index', compact('products'));
     }
@@ -25,14 +24,9 @@ class ProductController extends Controller
     }
     public function store( ProductValidation $request)
     {
-        Product::create([
-            'name' => $request->name,
-            'brand_id' => $request->brand_id,
-            'color_id' =>$request->color_id,
-            'size_id'=>$request->size_id,
-            'status'=>$request->status
-        ]);
-    
+        $product = $request->validated();
+        Product::create($product);
+
         return redirect()->route('product.index')->with('success',  'Product Added successfully ');
     }
     public function edit(string $productId)
@@ -42,17 +36,10 @@ class ProductController extends Controller
         return view('admin.pages.product.form', compact('product'));
     }
 
-    public function update(ProductValidation $request, string $productId)
+    public function update(ProductValidation $request, Product $product)
     {
-        $product = Product::find($productId);
-        
-        $product->update([
-            'name' => $request->name,
-            'brand_id' => $request->brand_id,
-            'color_id' => $request->color_id,
-            'size_id' => $request->size_id,
-            'status' => $request->status,
-        ]);
+        $products = $request->validated();
+        $product->update($products);
 
         return redirect()->route('product.index')->with('success', 'Product Updated successfully.');
     }

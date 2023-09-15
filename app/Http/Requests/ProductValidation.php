@@ -21,7 +21,11 @@ class ProductValidation extends FormRequest
         ];
         if ($this->isMethod('PUT')) {
            $rules = [
-                'name' => 'required','unique:products,name,' . $this->productId . 'max:255'
+                'name' => 'required','unique:products,name,' . $this->productId . 'max:255',
+                'brand_id' => ['required', 'max:255'],
+                'color_id' => ['required', 'max:255'],
+                'size_id' => ['required', 'max:255'],
+                'status' => ['required', 'max:255'],
            ];    
         }
         return $rules;
