@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SizeController;
@@ -62,6 +63,13 @@ Route::controller(ProductController::class)->middleware('auth')->name('product.'
     
 });
 
-
-
+Route::controller(CategoryController::class)->middleware('auth')->name('categories.')->group( function () {
+Route::get('/categories', 'index')->name('index');
+Route::get('/categories/create', 'create')->name('create');
+Route::post('/categories', 'store')->name('store');
+Route::get('/categories/{catId}/edit', 'edit')->name('edit');
+Route::put('/categories/{category}', 'update')->name('update');
+Route::delete('/categories/{catId}', 'destroy')->name('destroy');
+    }
+);
 require __DIR__ . '/auth.php';
