@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -29,7 +28,7 @@ class CategoryController extends Controller
         return redirect()->route('categories.index')->with('success', 'Category created successfully');
     }
 
-    public function edit($catId )
+    public function edit($catId)
     {
         $categories = Category::select('id','name', 'description', 'parent_id')->get(); 
         $category = Category::find($catId);
