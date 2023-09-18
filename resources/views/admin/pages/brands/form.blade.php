@@ -1,19 +1,14 @@
 @extends('admin.layouts.main')
 @section('content')
-<h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-    @if (isset($brands)) Update @else Add @endif Brand
-</h4>
-@if (isset($brands))
-<form action="{{route('brand.update',$brands->id)}}" method="post">
-    @method('PUT')
-    @else
-    <form action="{{route('brand.store')}}" method="post" class="mt-5">
-        @endif
+    <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+        @if (isset($brands)) Update @else Add @endif Brand
+    </h4>
+    <form action="{{ isset($brand) ? route('brand.update', $brand->id) : route('brand.store') }}" method="post" class="mt-5">
         @csrf
         <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
             <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Name</span>
-                <x-input placeholder="Enter Brand Name" name="name" type="text" value="{{ old('name', $brands->name ?? '') }}" required />
+                <x-input placeholder="Enter Brand Name" name="name" type="text" value="{{ old('name', $brand->name ?? '') }}" required />
                 @if($errors->has('name'))
                 <span class="text-xs text-red-600 dark:text-red-400">{{ $errors->first('name') }}</span>
                 @endif

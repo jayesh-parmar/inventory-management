@@ -13,10 +13,8 @@ class BrandRequest extends FormRequest
     }
     public function rules(): array
     {
-        $rules = [
-                'name' => ['required','max:255',Rule::unique('brands')->ignore($this->brand, 'name')],
-                ];
-        
-        return $rules;
+        return [
+                  'name' => ['required','max:255',Rule::unique('brands')->ignore($this->brand, 'name')],
+               ];
     }
 }

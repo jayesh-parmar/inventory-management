@@ -27,9 +27,9 @@ class BrandController extends Controller
    
     public function edit(string $brandId)
     {
-        $brands = Brand::find($brandId);
+        $brand = Brand::find($brandId);
 
-        return view('admin.pages.brands.form', compact('brands'));
+        return view('admin.pages.brands.form', compact('brand'));
     }
 
     public function update(BrandRequest $request, Brand $brand)
