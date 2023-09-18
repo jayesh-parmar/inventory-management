@@ -14,7 +14,7 @@ class ProductValidation extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'name' => ['required', 'max:255', Rule::unique('products')->ignore($this->productId, 'name')],
+            'name' => ['required', 'max:255', Rule::unique('products')->ignore($this->product, 'name')],
             'brand_id' => ['required', 'max:255'],
             'color_id' => ['required', 'max:255'],
             'size_id' => ['required', 'max:255'],
