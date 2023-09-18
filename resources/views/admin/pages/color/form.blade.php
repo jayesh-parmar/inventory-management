@@ -1,14 +1,9 @@
 @extends('admin.layouts.main')
 @section('content')
-<h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-    @if (isset($color)) Update @else Add @endif Color
-</h4>
-@if (isset($color))
-<form action="{{route('color.update',$color->id)}}" method="post">
-    @method('PUT')
-    @else
-    <form action="{{route('color.store')}}" method="post" class="mt-5">
-        @endif
+    <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+        @if (isset($color)) Update @else Add @endif Color
+    </h4>
+    <form action="{{ isset($color) ? route('color.update', $color->id) : route('color.store') }}" method="post" class="mt-5">
         @csrf
         <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
             <label class="block text-sm">

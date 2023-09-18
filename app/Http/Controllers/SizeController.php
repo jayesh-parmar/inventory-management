@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SizeRequest;
 use App\Models\Size;
-use Illuminate\Http\Request;
 
 class SizeController extends Controller
 {
     public function index()
     {
-        $sizes = Size::paginate(10);
+        $sizes = Size::select('id','name')->paginate(10);
 
         return view('admin.pages.size.index', ['sizes' => $sizes]);
     }
@@ -29,7 +28,7 @@ class SizeController extends Controller
 
     public function edit(string $sizeId)
     {
-        $size = Size::find($sizeId);
+        $size = Size::select('id','name')->find($sizeId);
 
         return view('admin.pages.size.form', ['size' => $size]);
     }

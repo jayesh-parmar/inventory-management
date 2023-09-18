@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ColorRequest;
 use App\Models\Color;
-use Illuminate\Http\Request;
 
 class ColorController extends Controller
 {
     public function index()
     {
-        $color = Color::paginate(10);
+        $color = Color::select('id','name')->paginate(10);
     
         return view('admin.pages.color.index', ['colors' => $color]);
     }
@@ -29,7 +28,7 @@ class ColorController extends Controller
 
     public function edit(string $colorId)
     {
-        $color = Color::find($colorId);
+        $color = Color::select('id','name')->find($colorId);
 
         return view('admin.pages.color.form', compact('color') );
     }

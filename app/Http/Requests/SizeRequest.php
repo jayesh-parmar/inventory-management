@@ -13,10 +13,8 @@ class SizeRequest extends FormRequest
     }
     public function rules(): array
     {
-        $rules = [
-            'name' => ['required', 'max:255', Rule::unique('sizes')->ignore($this->size, 'name')],
-        ];
-
-        return $rules;
+        return  [
+                   'name' => ['required','string','max:255', Rule::unique('sizes')->ignore($this->size, 'name')],
+                ];
     }
 }

@@ -9,7 +9,7 @@ class BrandController extends Controller
 {
     public function index()
     {
-        $brand = Brand::paginate(10);
+        $brand = Brand::select('id','name')->paginate(10);
         
         return view('admin.pages.brands.brands', ['brands' => $brand]);
     }
@@ -27,7 +27,7 @@ class BrandController extends Controller
    
     public function edit(string $brandId)
     {
-        $brand = Brand::find($brandId);
+        $brand = Brand::select('id','name')->find($brandId);
 
         return view('admin.pages.brands.form', compact('brand'));
     }

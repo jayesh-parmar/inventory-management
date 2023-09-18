@@ -1,14 +1,9 @@
 @extends('admin.layouts.main')
 @section('content')
-<h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-    @if (isset($size)) Update @else Add @endif size
-</h4>
-@if (isset($size))
-<form action="{{route('size.update',$size->id)}}" method="post">
-    @method('PUT')
-    @else
-    <form action="{{route('size.store')}}" method="post" class="mt-5">
-        @endif
+    <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+        @if (isset($size)) Update @else Add @endif size
+    </h4>
+    <form action="{{ isset($size) ? route('size.update', $size->id) : route('size.store') }}" method="post" class="mt-5">
         @csrf
         <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
             <label class="block text-sm">

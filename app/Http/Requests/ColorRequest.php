@@ -13,10 +13,8 @@ class ColorRequest extends FormRequest
     }
     public function rules(): array
     {
-        $rules = [
-            'name' => ['required', 'max:255', Rule::unique('colors')->ignore($this->color, 'name')],
-        ];
-
-        return $rules;
+        return [
+                  'name' => ['required','string','max:255', Rule::unique('colors')->ignore($this->color, 'name')],
+               ];
     }
 }
