@@ -41,7 +41,7 @@ Route::controller(SizeController::class)->middleware('auth')->name('size.')->gro
     Route::get('sizes/create', 'add')->name('create');
     Route::post('sizes', 'store')->name('store');
     Route::get('sizes/{sizeId}/edit', 'edit')->name('edit');
-    Route::post('sizes/{sizeId}/update', 'update')->name('update');
+    Route::put('sizes/{size}/update', 'update')->name('update');
 });
 
 Route::controller(ColorController::class)->middleware('auth')->name('color.')->group(function () {
@@ -49,7 +49,7 @@ Route::controller(ColorController::class)->middleware('auth')->name('color.')->g
     Route::get('colors/create','addColor')->name('create');
     Route::post('colors', 'store')->name('store');
     Route::get('colors/{colorId}/edit', 'edit')->name('edit');
-    Route::post('colors/{colorId}/update', 'update')->name('update');
+    Route::put('colors/{color}/update', 'update')->name('update');
 });
 
 require __DIR__ . '/auth.php';

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ColorRequest;
 use App\Models\Color;
 use Illuminate\Http\Request;
 
@@ -16,18 +17,12 @@ class ColorController extends Controller
 
     public function addColor()
     {
-        return view('admin.pages.color.add');
+        return view('admin.pages.color.form');
     }
 
-    public function store(Request $request)
+    public function store(ColorRequest $request)
     {
-        $request->validate([
-            'name' => 'required|unique:colors,name|max:255',
-        ]);
-
-        Color::create([
-            'name' => $request->name,
-        ]);
+        Color::create($request->validated());
 
         return redirect()->route('color.index')->with('success',  'New Color Added successfully ');
     }
@@ -36,19 +31,13 @@ class ColorController extends Controller
     {
         $color = Color::find($colorId);
 
-        return view('admin.pages.color.update', ['color' => $color]);
+        return view('admin.pages.color.form', compact('color') );
     }
 
-    public function update(Request $request, string $colorId)
+    public function update(ColorRequest $request, Color $color)
     {
-        $request->validate([
-            'name' => 'required|unique:colors,name,'.$colorId.'|max:255',
-        ]);
-
-        $color = Color::find($colorId);
-        $color->name = $request->name;
-        $color->save();
-
+        $color->update($request->validated());
+        
         return redirect()->route('color.index')->with('success', 'Color Update successfully.');
     }  
 }

@@ -10,6 +10,7 @@ class BrandController extends Controller
     public function index()
     {
         $brand = Brand::paginate(10);
+        
         return view('admin.pages.brands.brands', ['brands' => $brand]);
     }
     public function addBrand()
@@ -27,12 +28,14 @@ class BrandController extends Controller
     public function edit(string $brandId)
     {
         $brands = Brand::find($brandId);
+
         return view('admin.pages.brands.form', compact('brands'));
     }
 
     public function update(BrandRequest $request, Brand $brand)
     {
         $brand->update($request->validated());
+
         return redirect()->route('brand.index')->with('success', 'Brand Updated successfully.');
     }  
 }
