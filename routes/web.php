@@ -1,7 +1,6 @@
 <?php
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\BrandController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SizeController;
 use Illuminate\Support\Facades\Route;
@@ -34,7 +33,7 @@ Route::controller(BrandController::class)->middleware('auth')->name('brand.')->g
     Route::get('brands/create', 'addBrand')->name('create');
     Route::post('brands', 'store')->name('store');
     Route::get('brands/{brandId}/edit', 'edit')->name('edit');
-    Route::post('brands/{brandId}/update', 'update')->name('update');
+    Route::put('brands/{brand}/update', 'update')->name('update');
 });
 
 Route::controller(SizeController::class)->middleware('auth')->name('size.')->group(function () {
@@ -42,7 +41,7 @@ Route::controller(SizeController::class)->middleware('auth')->name('size.')->gro
     Route::get('sizes/create', 'add')->name('create');
     Route::post('sizes', 'store')->name('store');
     Route::get('sizes/{sizeId}/edit', 'edit')->name('edit');
-    Route::post('sizes/{sizeId}/update', 'update')->name('update');
+    Route::put('sizes/{size}/update', 'update')->name('update');
 });
 
 Route::controller(ColorController::class)->middleware('auth')->name('color.')->group(function () {
@@ -50,18 +49,7 @@ Route::controller(ColorController::class)->middleware('auth')->name('color.')->g
     Route::get('colors/create','addColor')->name('create');
     Route::post('colors', 'store')->name('store');
     Route::get('colors/{colorId}/edit', 'edit')->name('edit');
-    Route::post('colors/{colorId}/update', 'update')->name('update');
+    Route::put('colors/{color}/update', 'update')->name('update');
 });
-
-Route::controller(ProductController::class)->middleware('auth')->name('product.')->group(function () {
-    Route::get('products', 'index')->name('index');
-    Route::get('products/create', 'add')->name('create');
-    Route::post('product', 'store')->name('store');
-    Route::get('products/{productId}/edit', 'edit')->name('edit');
-    Route::put('products/{product}/update', 'update')->name('update');
-    
-});
-
-
 
 require __DIR__ . '/auth.php';
