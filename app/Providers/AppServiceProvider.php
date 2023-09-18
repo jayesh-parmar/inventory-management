@@ -18,13 +18,6 @@ class AppServiceProvider extends ServiceProvider
     }
     public function boot(): void
     {
-        view()->composer(['admin.pages.product.form',], function ($view) {
-
-            $brands = Brand::select('id', 'name')->get();
-            $colors = Color::select('id', 'name')->get();
-            $sizes = Size::select('id', 'name')->get();
-
-            $view->with(['brands' => $brands,'colors' => $colors,'sizes' => $sizes]);
-        });
+        
     }
 }
