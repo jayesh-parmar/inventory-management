@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Category::select('id', 'name', 'description', 'parent_id')->get();
-        return view('admin.pages.category.create', ['categories' => $categories]);
+        return view('admin.pages.category.form', ['categories' => $categories]);
     }
 
     public function store(CategoryRequest $request)
@@ -33,7 +33,7 @@ class CategoryController extends Controller
         $categories = Category::select('id','name', 'description', 'parent_id')->get(); 
         $category = Category::find($catId);
         
-        return view('admin.pages.category.edit', ['category' => $category, 'categories' => $categories]);
+        return view('admin.pages.category.form', ['category' => $category, 'categories' => $categories]);
     }
 
     public function update(CategoryRequest $request, Category $category)
