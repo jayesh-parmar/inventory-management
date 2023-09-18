@@ -10,11 +10,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::select('id', 'name', 'brand_id', 'color_id', 'size_id', 'status')->with([
-            'brand',   
-            'color',   
-            'size',    
-        ])->paginate(10);
+        $products = Product::select('id', 'name', 'brand_id', 'color_id', 'size_id', 'status')->paginate(10);
           
         return view('admin.pages.product.index', compact('products'));
     }
@@ -24,8 +20,7 @@ class ProductController extends Controller
     }
     public function store( ProductValidation $request)
     {
-        $product = $request->validated();
-        Product::create($product);
+        Product::create($request->validated());
 
         return redirect()->route('product.index')->with('success',  'Product Added successfully ');
     }
@@ -38,8 +33,7 @@ class ProductController extends Controller
 
     public function update(ProductValidation $request, Product $product)
     {
-        $products = $request->validated();
-        $product->update($products);
+        $product->update($request->validated());
 
         return redirect()->route('product.index')->with('success', 'Product Updated successfully.');
     }

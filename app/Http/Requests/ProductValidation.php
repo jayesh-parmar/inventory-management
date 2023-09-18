@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductValidation extends FormRequest
 {
@@ -12,22 +13,14 @@ class ProductValidation extends FormRequest
     }
     public function rules(): array
     {
-        $rules= [
-            'name' => ['required', 'unique:products,name,','max:255'],
+        $rules = [
+            'name' => ['required', 'max:255', Rule::unique('products')->ignore($this->productId, 'name')],
             'brand_id' => ['required', 'max:255'],
             'color_id' => ['required', 'max:255'],
             'size_id' => ['required', 'max:255'],
             'status' => ['required', 'max:255'],
         ];
-        if ($this->isMethod('PUT')) {
-           $rules = [
-                'name' => 'required','unique:products,name,' . $this->productId . 'max:255',
-                'brand_id' => ['required', 'max:255'],
-                'color_id' => ['required', 'max:255'],
-                'size_id' => ['required', 'max:255'],
-                'status' => ['required', 'max:255'],
-           ];    
-        }
         return $rules;
+
     }
 }
