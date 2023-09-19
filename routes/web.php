@@ -33,7 +33,7 @@ Route::controller(BrandController::class)->middleware('auth')->name('brand.')->g
     Route::get('brands/create', 'addBrand')->name('create');
     Route::post('brands', 'store')->name('store');
     Route::get('brands/{brandId}/edit', 'edit')->name('edit');
-    Route::post('brands/{brandId}/update', 'update')->name('update');
+    Route::post('brands/{brand}/update', 'update')->name('update');
 });
 
 Route::controller(SizeController::class)->middleware('auth')->name('size.')->group(function () {
@@ -41,7 +41,7 @@ Route::controller(SizeController::class)->middleware('auth')->name('size.')->gro
     Route::get('sizes/create', 'add')->name('create');
     Route::post('sizes', 'store')->name('store');
     Route::get('sizes/{sizeId}/edit', 'edit')->name('edit');
-    Route::post('sizes/{sizeId}/update', 'update')->name('update');
+    Route::post('sizes/{size}/update', 'update')->name('update');
 });
 
 Route::controller(ColorController::class)->middleware('auth')->name('color.')->group(function () {
@@ -49,7 +49,7 @@ Route::controller(ColorController::class)->middleware('auth')->name('color.')->g
     Route::get('colors/create','addColor')->name('create');
     Route::post('colors', 'store')->name('store');
     Route::get('colors/{colorId}/edit', 'edit')->name('edit');
-    Route::post('colors/{colorId}/update', 'update')->name('update');
+    Route::post('colors/{color}/update', 'update')->name('update');
 });
 
 require __DIR__ . '/auth.php';
