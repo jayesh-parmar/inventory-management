@@ -9,7 +9,7 @@ class SizeController extends Controller
 {
     public function index()
     {
-        $sizes = Size::select('id','name')->paginate(10);
+        $sizes = Size::select('id', 'name')->paginate(10);
 
         return view('admin.pages.size.index', ['sizes' => $sizes]);
     }
@@ -28,7 +28,7 @@ class SizeController extends Controller
 
     public function edit(string $sizeId)
     {
-        $size = Size::select('id','name')->find($sizeId);
+        $size = Size::select('id', 'name')->find($sizeId);
 
         return view('admin.pages.size.form', ['size' => $size]);
     }

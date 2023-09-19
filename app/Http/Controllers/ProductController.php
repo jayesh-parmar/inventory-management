@@ -21,7 +21,7 @@ class ProductController extends Controller
         $brands = Brand::select('id', 'name')->get();
         $colors = Color::select('id', 'name')->get();
         $sizes = Size::select('id', 'name')->get();    
-        return view('admin.pages.product.form', compact('brands','colors','sizes'));
+        return view('admin.pages.product.form', compact('brands', 'colors', 'sizes'));
     }
     public function store(ProductValidation $request)
     {
@@ -34,9 +34,9 @@ class ProductController extends Controller
         $brands = Brand::select('id', 'name')->get();
         $colors = Color::select('id', 'name')->get();
         $sizes = Size::select('id', 'name')->get(); 
-        $product = Product::select('id','name','brand_id','size_id','color_id','status')->find($productId);
+        $product = Product::select('id', 'name', 'brand_id', 'size_id', 'color_id', 'status')->find($productId);
 
-        return view('admin.pages.product.form', compact('product','brands','colors','sizes'));
+        return view('admin.pages.product.form', compact('product', 'brands', 'colors', 'sizes'));
     }
 
     public function update(ProductValidation $request, Product $product)
