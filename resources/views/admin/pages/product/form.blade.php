@@ -15,7 +15,7 @@
             </label>
             <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Select Brand</span>
-                <select class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="brand_id">
+                <select class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="brand_id" required>
                     <option value="" disabled selected>Select a Brand</option>
                     @foreach ($brands as $brand)
                     <option value="{{ $brand->id }}" @if(isset($product)) {{ $product->brand_id == $brand->id ? 'selected' : '' }} @endif>{{ $brand->name }}</option>
@@ -29,7 +29,7 @@
                 <label for="color" class="text-gray-700 dark:text-gray-400">
                     Select Color
                 </label>
-                <select id="color" name="color_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+                <select id="color" name="color_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" required>
                     <option value="" disabled selected>Select a Color</option>
                     @foreach ($colors as $color)
                     <option value="{{ $color->id }}" @if(isset($product)) {{ $product->color_id == $color->id ? 'selected' : '' }} @endif>{{ $color->name }}</option>
@@ -43,7 +43,7 @@
                 <span class="text-gray-700 dark:text-gray-400">
                     Select Sizes
                 </span>
-                <select class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="size_id">
+                <select class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="size_id" required>
                     <option value="" disabled selected>Select a Size</option>
                     @foreach ($sizes as $size )
                     <option value="{{$size->id }}" @if(isset($product)) {{ $product->size_id == $size->id ? 'selected' : '' }} @endif>{{$size->name}}</option>
