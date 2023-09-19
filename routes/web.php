@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SizeController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,11 @@ Route::controller(ColorController::class)->middleware('auth')->name('color.')->g
     Route::post('colors', 'store')->name('store');
     Route::get('colors/{colorId}/edit', 'edit')->name('edit');
     Route::post('colors/{color}/update', 'update')->name('update');
+});
+
+Route::controller(CategoryController::class)->middleware('auth')->name('categories.')->group(function () {
+    Route::get('categories/create', 'add')->name('create');
+    Route::post('categories', 'store')->name('store');
 });
 
 require __DIR__ . '/auth.php';
