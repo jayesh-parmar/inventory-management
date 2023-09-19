@@ -43,20 +43,19 @@
                             {{ $product->brand->name }}
                         </td>
                         <td class="px-4 py-3 text-sm">
-                            {{ $product->color->name }}
+                            {{ $product->color ? $product->color->name : '' }}
                         </td>
                         <td class="px-4 py-3 text-sm">
-                            {{ $product->size->name }}
+                            {{ $product->size ? $product->size->name : '' }}
                         </td>
                         <td class="px-4 py-3 text-xs">
-                            @php
-                            if($product->status == 1)
-                            echo '<span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">delivered</span>';
-                            else
-                            echo '<span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
-                                Pending
-                            </span>'
-                            @endphp
+                            @if ($product->status == 1)
+                                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">delivered</span>
+                            @else
+                                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
+                                    Pending
+                                </span>
+                            @endif
                         </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
