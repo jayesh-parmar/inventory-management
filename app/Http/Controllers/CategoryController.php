@@ -24,12 +24,12 @@ class CategoryController extends Controller
     {
         Category::create($request->all());
 
-        return redirect()->route('categories.index')->with('success', 'Added successfully ');
+        return redirect()->route('categories.index')->with('success', 'Category added successfully ');
     }
-    public function edit(string $catId)
+    public function edit(string $categoryId)
     {
-        $categories = Category::select('id', 'name', 'description', 'parent_id')->get();
-        $category = Category::select('id', 'name', 'description', 'parent_id')->find($catId) ;
+        $categories = Category::select('id', 'name', 'description')->get();
+        $category = Category::select('id', 'name', 'description', 'parent_id')->find($categoryId);
         
         return view('admin.pages.category.form', compact('category','categories'));
     }
@@ -37,15 +37,17 @@ class CategoryController extends Controller
     {
         $category->update($request->all());
 
-        return redirect()->route('categories.index')->with('success', 'Category Updated successfully.');
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
-    public function destroy($id)
+    public function destroy(string $categoryId)
     {
-        $category = Category::find($id);
+         $category = Category::select('id')->find($categoryId);
 
+        if ($category->children->isNotEmpty()) {
+            return redirect()->route('categories.index')->with('error', 'Cannot delete category with child categories.');
+        }
         $category->children()->delete();
-
         $category->delete();
 
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
