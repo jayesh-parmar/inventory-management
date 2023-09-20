@@ -21,7 +21,7 @@ class ColorController extends Controller
 
     public function store(ColorRequest $request)
     {
-        Color::create($request->all());
+        Color::create($request->validated());
 
         return redirect()->route('color.index')->with('success',  'New Color Added successfully ');
     }
@@ -35,7 +35,7 @@ class ColorController extends Controller
 
     public function update(ColorRequest $request, Color $color)
     {
-        $color->update($request->all());
+        $color->update($request->validated());
         
         return redirect()->route('color.index')->with('success', 'Color Update successfully.');
     }  

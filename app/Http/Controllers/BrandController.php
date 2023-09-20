@@ -20,7 +20,7 @@ class BrandController extends Controller
 
     public function store(BrandRequest $request)
     {
-        Brand::create($request->all());
+        Brand::create($request->validated());
 
         return redirect()->route('brand.index')->with('success', 'New Brand Added successfully .');
     }
@@ -34,7 +34,7 @@ class BrandController extends Controller
 
     public function update(BrandRequest $request, Brand $brand)
     {
-        $brand->update($request->all());
+        $brand->update($request->validated());
 
         return redirect()->route('brand.index')->with('success', 'Brand Updated successfully.');
     }  
