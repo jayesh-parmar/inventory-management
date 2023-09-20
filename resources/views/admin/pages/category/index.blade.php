@@ -1,7 +1,7 @@
 <h3>Category List</h3>
 
 @if(session('success'))
-<div >
+<div>
     {{ session('success') }}
 </div>
 @endif

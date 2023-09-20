@@ -1,5 +1,6 @@
 <li class="category-item">
     <div style="display: flex; align-items: center; background-color: #f0f0f0;">
+        <p style="margin-right: 10px;">({{ $category->children->count() }}) </p>
         <h5 style="margin-right: 10px;">{{ $category->name }}</h5>
         <div style="margin-right: 10px;">{{ $category->description }}</div>
         <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning" style="margin-right: 10px;text-decoration: none;">Edit</a>
