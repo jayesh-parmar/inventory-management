@@ -18,7 +18,7 @@
                 <select class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="brand_id" required>
                     <option value="" disabled selected>Select a Brand</option>
                     @foreach ($brands as $brand)
-                    <option value="{{ $brand->id }}" @if(isset($product)) {{ $product->brand_id == $brand->id ? 'selected' : '' }} @endif>{{ $brand->name }}</option>
+                    <option value="{{ $brand->id }}" {{ old('brand_id', isset($product) ? $product->brand_id : null) == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('brand_id'))
@@ -29,10 +29,10 @@
                 <label for="color" class="text-gray-700 dark:text-gray-400">
                     Select Color
                 </label>
-                <select id="color" name="color_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" >
+                <select id="color" name="color_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
                     <option value="" disabled selected>Select a Color</option>
                     @foreach ($colors as $color)
-                    <option value="{{ $color->id }}" @if(isset($product)) {{ $product->color_id == $color->id ? 'selected' : '' }} @endif>{{ $color->name }}</option>
+                    <option value="{{ $color->id }}" {{ old('color_id', isset($product) ? $product->color_id : null) == $color->id ? 'selected' : '' }}>{{ $color->name }}</option>
                     @endforeach
                 </select>
             </label>
@@ -43,7 +43,7 @@
                 <select class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="size_id">
                     <option value="" disabled selected>Select a Size</option>
                     @foreach ($sizes as $size )
-                    <option value="{{$size->id }}" @if(isset($product)) {{ $product->size_id == $size->id ? 'selected' : '' }} @endif>{{$size->name}}</option>
+                    <option value="{{$size->id }}" {{ old('size_id', isset($product) ? $product->size_id : null) == $size->id ? 'selected' : '' }}>{{$size->name}}</option>
                     @endforeach
                 </select>
             </label>
@@ -53,12 +53,12 @@
                 </span>
                 <div class="mt-2">
                     <label class="inline-flex items-center text-gray-600 dark:text-gray-400">
-                        <input type="radio" checked @if(isset($product)) {{ $product->status == '0' ? 'checked' : '' }} @endif class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="status" value="0" />
+                        <input type="radio" {{ old('status', isset($product) ? $product->status : null) == '0' ? 'checked' : '' }} class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="status" value="0" />
                         <span class="ml-2">Pending</span>
                     </label>
                     <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
-                        <input type="radio" @if(isset($product)) {{ $product->status == '1' ? 'checked' : '' }} @endif class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="status" value="1" />
-                        <span class="ml-2">delivered</span>
+                        <input type="radio" {{ old('status', isset($product) ? $product->status : null) == '1' ? 'checked' : '' }} class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="status" value="1" />
+                        <span class="ml-2">Delivered</span>
                     </label>
                 </div>
             </div>
