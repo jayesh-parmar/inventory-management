@@ -1,27 +1,22 @@
-<h1>Create Category</h1>
-
-<form method="POST" action="{{ route('categories.store') }}">
+@if (isset($category)) <h1>Update Category</h1> @else <h1>Create Category</h1> @endif
+<form action="{{ isset($category) ? route('categories.update', $category->id) : route('categories.store') }}" method="post" class="mt-5">
     @csrf
-
     <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" id="name" name="name" class="form-control" required>
+        <input type="text" id="name" name="name" class="form-control" value="{{ old('name', $category->name ?? '') }}" required>
     </div><br>
-
-    <div class="form-group">
-        <label for="description">Description</label>
-        <textarea id="description" name="description" class="form-control"></textarea>
-    </div><br>
-
     <div class="form-group">
         <label for="parent_id">Parent Category</label>
         <select id="parent_id" name="parent_id" class="form-control">
             <option value="">Select Parent Category</option>
-            @foreach($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @foreach($categories as $cat)
+            <option value="{{ $cat->id }}" @if(isset($category)) {{ $category->parent_id == $cat->id ? 'selected' : '' }} @endif>{{ $cat->name }}</option>
             @endforeach
         </select>
     </div><br>
-
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" value="{{ old('name', $category->description ?? '') }}" class="form-control">@if (isset($category)){{$category->description }}@endif</textarea>
+    </div><br>
     <button type="submit" class="btn btn-primary">Create</button>
 </form>
