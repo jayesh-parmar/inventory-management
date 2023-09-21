@@ -22,7 +22,7 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
-        Category::create($request->all());
+        Category::create($request->validated());
 
         return redirect()->route('categories.index')->with('success', 'Category added successfully ');
     }
@@ -35,17 +35,18 @@ class CategoryController extends Controller
     }
     public function update(CategoryRequest $request, Category $category)
     {
-        $category->update($request->all());
+        $category->update($request->validated());
 
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
     public function destroy(string $categoryId)
     {
-         $category = Category::select('id')->find($categoryId);
+        $category = Category::select('id')->find($categoryId);
+        return $category;
 
         if ($category->children->isNotEmpty()) {
-            return redirect()->route('categories.index')->with('error', 'Cannot delete category with child categories.');
+            return redirect()->route('categories.index')->with('error', 'This category cannot be deleted as there are one or more child categories attached.');
         }
         $category->children()->delete();
         $category->delete();
