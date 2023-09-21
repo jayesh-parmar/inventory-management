@@ -14,7 +14,7 @@ class ProductValidation extends FormRequest
             'brand_id' => ['required', 'string', 'max:255'],
             'color_id' => ['nullable', 'string', 'max:255'],
             'size_id' => ['string', 'nullable', 'max:255'],
-            'status' => ['boolean', 'max:255'],
+            'status' => ['boolean'],
         ];
     }
 }
