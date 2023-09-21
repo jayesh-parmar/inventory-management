@@ -42,11 +42,10 @@ class CategoryController extends Controller
 
     public function destroy(string $categoryId)
     {
-        $category = Category::select('id')->find($categoryId);
-        return $category;
+         $category = Category::find($categoryId);
 
         if ($category->children->isNotEmpty()) {
-            return redirect()->route('categories.index')->with('error', 'This category cannot be deleted as there are one or more child categories attached.');
+            return redirect()->route('categories.index')->with('error', 'Cannot delete category with child categories.');
         }
         $category->children()->delete();
         $category->delete();

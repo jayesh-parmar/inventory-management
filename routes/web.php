@@ -55,7 +55,7 @@ Route::controller(ColorController::class)->middleware('auth')->name('color.')->g
 
 Route::controller(CategoryController::class)->middleware('auth')->name('categories.')->group(function () {
     Route::get('categories', 'index')->name('index');
-    Route::get('categories/create', 'add')->name('create');
+    Route::get('categories/create/{parentId?}', 'add')->name('create');
     Route::post('categories', 'store')->name('store');
     Route::get('categories/{catId}/edit', 'edit')->name('edit');
     Route::post('categories/{category}/update', 'update')->name('update');

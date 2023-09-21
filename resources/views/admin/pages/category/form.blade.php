@@ -1,30 +1,38 @@
+ @extends('admin.layouts.main')
+ @section('content')
+    <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+        @if (isset($category))Update Category @else Create Category @endif
+    </h4>
+    <form action="{{ isset($category) ? route('categories.update', $category->id) : route('categories.store') }}" method="post" class="mt-5">
+        @csrf
 
-@if (isset($category)) <h1>Update Category</h1> @else <h1>Create Category</h1> @endif
-<form action="{{ isset($category) ? route('categories.update', $category->id) : route('categories.store') }}" method="post" class="mt-5">
-    @csrf
-
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" class="form-control" value="{{ old('name', $category->name ?? '') }}" required>
-    </div>
-    @if($errors->has('name'))
-    <div style="color: red;">{{ $errors->first('name') }}</div>
-    @endif
-    <br>
-
-    <div class="form-group">
-        <label for="parent_id">Parent Category</label>
-        <select id="parent_id" name="parent_id" class="form-control">
-            <option value="">Select Parent Category</option>
-            @foreach($categories as $cat)
-            <option value="{{ $cat->id }}" @if(isset($category)) {{ $category->parent_id == $cat->id ? 'selected' : '' }} @endif>{{ $cat->name }}</option>
-            @endforeach
-        </select>
-    </div><br>
-
-    <div class="form-group">
-        <label for="description">Description</label>
-        <textarea id="description" name="description" value="{{ old('name', $category->description ?? '') }}" class="form-control">@if (isset($category)){{$category->description }}@endif</textarea>
-    </div><br>
-    <button type="submit" class="btn btn-primary">Create</button>
-</form>
+        <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+            <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">Name</span>
+                <x-input placeholder="Enter Category Name" name="name" type="text" value="{{ old('name', $category->name ?? '') }}" required />
+                @if($errors->has('name'))
+                <span class="text-xs text-red-600 dark:text-red-400">{{ $errors->first('name') }}</span>
+                @endif
+            </label>
+            <label class="block mt-4 text-sm">
+                <span class="text-gray-700 dark:text-gray-400">Parent Category</span>
+                <select id="parent_id" name="parent_id" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+                    <option value="">Select Parent Category</option>
+                    @foreach($categories as $cat)
+                    <option value="{{ $cat->id }}" @if(isset($category)) {{ $category->parent_id == $cat->id ? 'selected' : '' }} @endif>{{ $cat->name }}</option>
+                    @endforeach
+                </select>
+            </label>
+            <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">Description</span>
+                <textarea class="block w-full mt-1 text-sm border-green-600 dark:text-gray-300 dark:bg-gray-700 focus:border-green-400 focus:outline-none focus:shadow-outline-green form-input" id="description" name="description" value="{{ old('name', $category->description ?? '') }}" class="form-control">@if (isset($category)){{$category->description }}@endif</textarea>
+            </label>
+            <div class="mt-4">
+                <button class="px-4 py-2 bt-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                    Save
+                </button>
+            </div>
+        </div>
+        </div>
+    </form>
+ @endsection
