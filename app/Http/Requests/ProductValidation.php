@@ -11,9 +11,9 @@ class ProductValidation extends FormRequest
     {
         return [
             'name' => ['required', 'max:255', Rule::unique('products')->ignore($this->product)],
-            'brand_id' => ['required', 'string'],
-            'color_id' => ['nullable', 'string'],
-            'size_id' => ['string', 'nullable'],
+            'brand_id' => ['required', 'string', 'exists:brands,id'],
+            'color_id' => ['nullable', 'string', 'exists:colors,id'],
+            'size_id' => ['string', 'nullable', 'exists:sizes,id'],
             'status' => ['boolean'],
         ];
     }
