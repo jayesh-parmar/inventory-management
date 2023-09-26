@@ -13,11 +13,19 @@ class CategoryController extends Controller
         return view('admin.pages.category.index', compact('categories'));
     }
 
-    public function add()
+    public function add($parentId = null)
     {
-        $categories = Category::select('id', 'name', 'description', 'parent_id')->get();
-        
-        return view('admin.pages.category.form', compact('categories'));
+        if ($parentId) {
+            $parentCategoryId = Category::find($parentId);
+
+            if (!$parentCategoryId) {
+                return redirect()->back()->with('error', 'Parent category not found.');  
+            }
+            return view('admin.pages.category.form', compact('parentCategoryId'));
+        }
+        else {
+            return view('admin.pages.category.form');
+        }
     }
 
     public function store(CategoryRequest $request)
@@ -28,10 +36,9 @@ class CategoryController extends Controller
     }
     public function edit(string $categoryId)
     {
-        $categories = Category::select('id', 'name', 'description')->get();
         $category = Category::select('id', 'name', 'description', 'parent_id')->find($categoryId);
         
-        return view('admin.pages.category.form', compact('category','categories'));
+        return view('admin.pages.category.form', compact('category'));
     }
     public function update(CategoryRequest $request, Category $category)
     {
@@ -45,7 +52,7 @@ class CategoryController extends Controller
          $category = Category::find($categoryId);
 
         if ($category->children->isNotEmpty()) {
-            return redirect()->route('categories.index')->with('error', 'Cannot delete category with child categories.');
+            return redirect()->route('categories.index')->with('error', 'This category cannot be deleted as there are one or more child categories attached.');
         }
         $category->children()->delete();
         $category->delete();

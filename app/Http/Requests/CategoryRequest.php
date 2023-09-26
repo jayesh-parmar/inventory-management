@@ -25,6 +25,7 @@ class CategoryRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255', Rule::unique('categories')->ignore($this->category)],
             'description' => ['nullable', 'string'],
+            'parent_id' => ['nullable', 'string'],
         ];
     }
 }
