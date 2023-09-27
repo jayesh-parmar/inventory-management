@@ -13,12 +13,8 @@
             <span class="text-xs text-red-600 dark:text-red-400">{{ $errors->first('name') }}</span>
             @endif
         </label>
-        @if(isset($parentCategoryId))
-        <input type="hidden" name="parent_id" value="{{ $parentCategoryId->id }}">
-        <label class="block text-sm">
-            <span class="text-gray-700 dark:text-gray-400">Parent Category Name</span>
-            <input class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" type="text" name="parent_name" value="{{ $parentCategoryId->name }}" disabled />
-        </label>
+        @if(isset($parentId))
+        <input type="hidden" name="parent_id" value="{{ $parentId }}">
         @endif
         <label class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Description</span>
