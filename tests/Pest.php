@@ -11,6 +11,24 @@
 |
 */
 
+use App\Models\User;
+
+function setUpUser()
+{
+    $user = User::factory()->create();
+
+    $response = test()->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    test()->assertAuthenticated(); // Ensure user is authenticated
+}
+
+beforeEach(function () {
+    setUpUser();
+});
+
 uses(
     Tests\TestCase::class,
     // Illuminate\Foundation\Testing\RefreshDatabase::class,

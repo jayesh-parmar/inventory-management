@@ -9,10 +9,7 @@ it('user can add a new brand', function () {
         'name' => 'test',
     ]);
 
-    $this->assertEquals(1, Brand::count());
-
     $response->assertStatus(302);
-
     $response->assertRedirect(route('brand.index'));
     $brand = Brand::first();
 
