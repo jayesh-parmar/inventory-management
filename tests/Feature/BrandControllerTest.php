@@ -1,50 +1,40 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\Brand;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
-class BrandControllerTest extends TestCase
-{
-    use RefreshDatabase;
-   
-    public function test_user_can_add_a_new_brand(): void
-    {
-        $this->setUpUser();
-        
-      $response = $this->from(route('brand.create'))->post(route('brand.store'),[
-            'name'=>'test'
-        ]);
+it('user can add a new brand', function () {
+    $this->setUpUser();
 
-        $this->assertEquals(1,Brand::count());
+    $response = $this->from(route('brand.create'))->post(route('brand.store'), [
+        'name' => 'test',
+    ]);
 
-        $response->assertStatus(302);
+    $this->assertEquals(1, Brand::count());
 
-        $response->assertRedirect(route('brand.index'));
-        $brand = Brand::first();
+    $response->assertStatus(302);
 
-        $this->assertEquals($brand->name, 'test');
+    $response->assertRedirect(route('brand.index'));
+    $brand = Brand::first();
 
-    }
-    public function test_user_can_update_a_brand(): void
-    {
-       $this->setUpUser();
+    $this->assertEquals($brand->name, 'test');
+});
 
-        $response = $this->from(route('brand.create'))->post(route('brand.store'), [
-            'name' => 'test'
-        ]);
+it('user can update a brand', function () {
+    $this->setUpUser();
 
-        $brand = Brand::first();
-        $response = $this->post(route('brand.update',$brand->id),[
-            'name' => 'update test'
-        ]);
+    $response = $this->from(route('brand.create'))->post(route('brand.store'), [
+        'name' => 'test',
+    ]);
 
-        $update_brand = Brand::first();
+    $brand = Brand::first();
+    $response = $this->post(route('brand.update', $brand->id), [
+        'name' => 'update test',
+    ]);
 
-        $this->assertEquals('update test', $update_brand->name);
+    $update_brand = Brand::first();
 
-        $response->assertRedirect(route('brand.index'));
-    }  
-}
+    $this->assertEquals('update test', $update_brand->name);
+
+    $response->assertRedirect(route('brand.index'));
+});
+
