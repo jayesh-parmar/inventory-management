@@ -9,12 +9,10 @@ trait UserLogin{
 
     public function setUpUser(){
 
-        $this->user = User::factory()->create();
+        $user = User::factory()->create();
 
-        $response = $this->post('/login', [
-            'email' => $this->user->email,
-            'password' => 'password',
-        ]);
-        $this->assertAuthenticated();
+        $response = $this->actingAs($user)
+            ->withSession(['banned' => false])
+            ->get('/login');
     }
 }

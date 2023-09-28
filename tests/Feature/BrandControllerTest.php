@@ -34,4 +34,3 @@ it('user can update a brand', function () {
 
     $response->assertRedirect(route('brand.index'));
 });
-
