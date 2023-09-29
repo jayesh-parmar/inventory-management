@@ -1,12 +1,11 @@
 <?php
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 function userLogin()
 {
     $user = User::factory()->create();
-    Auth::login($user);
+    test()->actingAs($user);
 }
 
 uses(
