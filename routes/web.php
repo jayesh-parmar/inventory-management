@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SizeController;
@@ -51,6 +52,14 @@ Route::controller(ColorController::class)->middleware('auth')->name('color.')->g
     Route::post('colors', 'store')->name('store');
     Route::get('colors/{colorId}/edit', 'edit')->name('edit');
     Route::post('colors/{color}/update', 'update')->name('update');
+});
+
+Route::controller(ProductController::class)->middleware('auth')->name('product.')->group(function () {
+    Route::get('products', 'index')->name('index');
+    Route::get('products/create', 'add')->name('create');
+    Route::post('product', 'store')->name('store');
+    Route::get('products/{productId}/edit', 'edit')->name('edit');
+    Route::post('products/{product}/update', 'update')->name('update');
 });
 
 Route::controller(CategoryController::class)->middleware('auth')->name('categories.')->group(function () {
