@@ -25,11 +25,8 @@ it('user can update a brand', function () {
     $user = User::factory()->create();
     $response = $this->actingAs($user);
 
-    $response = $this->post(route('brand.store'), [
-        'name' => 'test',
-    ]);
-
-    $brand = Brand::first();
+    $brand = Brand::where('name', 'test')->first();
+    
     $response = $this->post(route('brand.update', $brand->id), [
         'name' => 'update test',
     ]);
