@@ -1,8 +1,6 @@
 <?php
 
 use App\Models\Brand;
-use Illuminate\Database\Eloquent\Factories\Factory;
-
 
 it('user can add a new brand', function () {
 
