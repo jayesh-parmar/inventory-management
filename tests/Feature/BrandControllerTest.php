@@ -4,7 +4,7 @@ use App\Models\Brand;
 
 it('user can add a new brand', function () {
 
-    $this->userLogin();
+    userLogin();
 
     $response = $this->post(route('brand.store'), [
         'name' => 'test',
@@ -20,7 +20,7 @@ it('user can add a new brand', function () {
 
 it('user can update a brand', function () {
 
-    $this->userLogin();
+    userLogin();
 
     $brand = Brand::where('name', 'test')->first();
 
