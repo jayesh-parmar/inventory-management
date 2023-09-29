@@ -1,9 +1,12 @@
 <?php
 
 use App\Models\Brand;
+use App\Models\User;
 
 it('user can add a new brand', function () {
-    $this->setUpUser();
+
+    $user = User::factory()->create();
+    $response = $this->actingAs($user);
 
     $response = $this->from(route('brand.create'))->post(route('brand.store'), [
         'name' => 'test',
@@ -17,7 +20,9 @@ it('user can add a new brand', function () {
 });
 
 it('user can update a brand', function () {
-    $this->setUpUser();
+
+    $user = User::factory()->create();
+    $response = $this->actingAs($user);
 
     $response = $this->from(route('brand.create'))->post(route('brand.store'), [
         'name' => 'test',
@@ -29,7 +34,6 @@ it('user can update a brand', function () {
     ]);
 
     $update_brand = Brand::first();
-
     $this->assertEquals('update test', $update_brand->name);
 
     $response->assertRedirect(route('brand.index'));
