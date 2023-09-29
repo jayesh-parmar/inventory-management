@@ -6,12 +6,11 @@ it('user can add a new size', function () {
 
     userLogin();
 
-    $response = $this->post(route('size.store'), [
+    $this->post(route('size.store'), [
         'name' => '2200',
-    ]);
-
-    $response->assertStatus(302);
-    $response->assertRedirect(route('size.index'));
+    ])
+    ->assertStatus(302)
+    ->assertRedirect(route('size.index'));
 
     $this->assertDatabaseHas('sizes', [
         'name' => '2200',
@@ -24,10 +23,10 @@ it('user can update a size', function () {
 
     $size = Size::where('name', '2200')->first();
 
-    $response = $this->post(route('size.update', $size->id), [
+     $this->post(route('size.update', $size->id), [
         'name' => 'update 2200',
-    ]);
-    $response->assertRedirect(route('size.index'));
+    ])
+    ->assertRedirect(route('size.index'));
 
     $this->assertDatabaseHas('sizes', [
         'name' => 'update 2200',
