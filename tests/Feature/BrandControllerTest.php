@@ -8,15 +8,16 @@ it('user can add a new brand', function () {
     $user = User::factory()->create();
     $response = $this->actingAs($user);
 
-    $response = $this->from(route('brand.create'))->post(route('brand.store'), [
+    $response = $this->post(route('brand.store'), [
         'name' => 'test',
     ]);
-
+    
     $response->assertStatus(302);
     $response->assertRedirect(route('brand.index'));
-    $brand = Brand::first();
 
-    $this->assertEquals($brand->name, 'test');
+    $this->assertDatabaseHas('brands', [
+        'name' => 'test',
+    ]);  
 });
 
 it('user can update a brand', function () {
@@ -24,7 +25,7 @@ it('user can update a brand', function () {
     $user = User::factory()->create();
     $response = $this->actingAs($user);
 
-    $response = $this->from(route('brand.create'))->post(route('brand.store'), [
+    $response = $this->post(route('brand.store'), [
         'name' => 'test',
     ]);
 
@@ -33,8 +34,9 @@ it('user can update a brand', function () {
         'name' => 'update test',
     ]);
 
-    $update_brand = Brand::first();
-    $this->assertEquals('update test', $update_brand->name);
+    $this->assertDatabaseHas('brands', [
+        'name' => 'update test',
+    ]);
 
     $response->assertRedirect(route('brand.index'));
 });

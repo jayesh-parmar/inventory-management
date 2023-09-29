@@ -46,7 +46,7 @@ return [
         'testing_db' => [
             'driver' => 'mysql',
             'host' => env('TEST_DB_HOST', 'localhost'),
-            'database' => env('TEST_DB_DATABASE', 'laravel11'),
+            'database' => env('TEST_DB_DATABASE', ''),
             'username' => env('TEST_DB_USERNAME', 'root'),
             'password' => env('TEST_DB_PASSWORD', ''),
             'charset' => 'utf8',
