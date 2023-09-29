@@ -25,8 +25,9 @@ it('user can update a brand', function () {
 
     $brand = Brand::factory()->create(['name' => 'test']);
 
-    $this->post(route('brand.update', ['brand' => $brand->id]), [
-        'name' => 'update test',
+    $this->post(route('brand.update', $brand->id), [
+        'id' => $brand->id,
+        'name' => 'update test'
     ])
     ->assertRedirect(route('brand.index'));
 
