@@ -1,12 +1,10 @@
 <?php
 
 use App\Models\Brand;
-use App\Models\User;
 
 it('user can add a new brand', function () {
 
-    $user = User::factory()->create();
-    $response = $this->actingAs($user);
+    $this->userLogin();
 
     $response = $this->post(route('brand.store'), [
         'name' => 'test',
@@ -22,18 +20,16 @@ it('user can add a new brand', function () {
 
 it('user can update a brand', function () {
 
-    $user = User::factory()->create();
-    $response = $this->actingAs($user);
+    $this->userLogin();
 
     $brand = Brand::where('name', 'test')->first();
-    
+
     $response = $this->post(route('brand.update', $brand->id), [
         'name' => 'update test',
     ]);
+    $response->assertRedirect(route('brand.index'));
 
     $this->assertDatabaseHas('brands', [
         'name' => 'update test',
     ]);
-
-    $response->assertRedirect(route('brand.index'));
 });

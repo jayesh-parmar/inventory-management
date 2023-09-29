@@ -11,6 +11,18 @@
 |
 */
 
+use App\Models\User;
+
+beforeEach(function () {
+    // Create and authenticate a user globally
+    $this->user = User::factory()->create();
+    $this->actingAs($this->user);
+});
+
+test('example test', function () {
+    // Your test logic goes here
+});
+
 uses(
     Tests\TestCase::class,
     // Illuminate\Foundation\Testing\RefreshDatabase::class,
