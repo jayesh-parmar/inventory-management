@@ -6,23 +6,13 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('category_products', function (Blueprint $table) {
-            $table->id('category_id');
-            $table->id('product_id');
-            $table->timestamps();
+        Schema::create('category_product', function (Blueprint $table) {
+            $table->id();
+            $table->foreignUuid('product_id')->constrained();
+            $table->foreignId('category_id')->constrained();
+            $table->timestamps();   
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('category_products');
     }
 };
