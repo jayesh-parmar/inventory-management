@@ -31,7 +31,7 @@ class ProductController extends Controller
        $product= Product::create($request->validated());
        $product->attachCategories($request->input('category_ids'));
 
-        return redirect()->route('product.index')->with('success',  'Product added successfully ');
+        return redirect()->route('product.index')->with('success',  'Product added successfully .');
     }
     public function edit(string $productId)
     {
