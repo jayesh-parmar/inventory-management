@@ -47,6 +47,13 @@ class ProductController extends Controller
         $categories = Category::select('id', 'name')->get();
 
        $product = Product::select('id', 'name', 'brand_id', 'size_id', 'color_id', 'status')->with('categories')->find($productId);
+       $productCategories = $product->categories->pluck('id')->toArray();
+
+       foreach ($productCategories as $categoryId) {
+        if (!$categories->contains('id', $categoryId)) {
+                $product->categories()->detach($categoryId);
+            }
+        }
 
         return view('admin.pages.product.form', compact('product', 'brands', 'colors', 'sizes', 'categories'));
     }
