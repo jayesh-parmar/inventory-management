@@ -33,6 +33,12 @@ class ProductController extends Controller
 
         return redirect()->route('product.index')->with('success',  'Product added successfully.');
     }
+
+    private function attachCategories($product, $categoryIds)
+    {
+        $product->categories()->attach($categoryIds);
+    }
+
     public function edit(string $productId)
     {
         $brands = Brand::select('id', 'name')->get();
@@ -40,7 +46,7 @@ class ProductController extends Controller
         $sizes = Size::select('id', 'name')->get();
         $categories = Category::select('id', 'name')->get();
 
-        $product = Product::select('id', 'name', 'brand_id', 'size_id', 'color_id', 'status')->find($productId);
+       $product = Product::select('id', 'name', 'brand_id', 'size_id', 'color_id', 'status')->with('categories')->find($productId);
 
         return view('admin.pages.product.form', compact('product', 'brands', 'colors', 'sizes', 'categories'));
     }
@@ -48,7 +54,7 @@ class ProductController extends Controller
     public function update(ProductValidation $request, Product $product)
     {
         $product->update($request->validated());
-        $product->categories()->sync($request->input('category_ids', []));
+        $product->categories()->sync($request->validated(['category_ids'] ?? []));
 
         return redirect()->route('product.index')->with('success', 'Product updated successfully.');
     }
