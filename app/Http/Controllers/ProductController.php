@@ -48,7 +48,7 @@ class ProductController extends Controller
         $sizes = Size::select('id', 'name')->get();
         $categories = Category::select('id', 'name')->get();
 
-       return $product = Product::select('id', 'name', 'brand_id', 'size_id', 'color_id', 'status')->with('categories:id,name')->find($productId);
+       $product = Product::select('id', 'name', 'brand_id', 'size_id', 'color_id', 'status')->with('categories:id,name')->find($productId);
        $productCategories = $product->categories->pluck('id')->toArray();
 
        return view('admin.pages.product.form', compact('product', 'brands', 'colors', 'sizes', 'categories'));
