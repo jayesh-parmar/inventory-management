@@ -42,6 +42,18 @@ return [
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
+        
+        'testing_db' => [
+            'driver' => 'mysql',
+            'host' => env('TEST_DB_HOST', 'localhost'),
+            'database' => env('TEST_DB_DATABASE', ''),
+            'username' => env('TEST_DB_USERNAME', 'root'),
+            'password' => env('TEST_DB_PASSWORD', ''),
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+        ],
 
         'mysql' => [
             'driver' => 'mysql',
@@ -92,7 +104,6 @@ return [
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
-
     ],
 
     /*
