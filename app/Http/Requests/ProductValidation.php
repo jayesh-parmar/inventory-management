@@ -15,7 +15,8 @@ class ProductValidation extends FormRequest
             'color_id' => ['nullable', 'string', 'exists:colors,id'],
             'size_id' => ['nullable', 'string', 'exists:sizes,id'],
             'status' => ['boolean'],
-            'category_ids' => ['array'],
+            'category_ids' => ['required','array'],
+            'category_ids.*' => ['exists:categories,id'],
         ];
     }
 }

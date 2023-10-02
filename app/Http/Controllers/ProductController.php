@@ -29,7 +29,7 @@ class ProductController extends Controller
     public function store(ProductValidation $request)
     {
         $product = Product::create($request->validated());
-        $product->attachCategories($request->input('category_ids'));
+        $product->attachCategories($request->validated(['category_ids']));
 
         return redirect()->route('product.index')->with('success',  'Product added successfully.');
     }
@@ -46,22 +46,18 @@ class ProductController extends Controller
         $sizes = Size::select('id', 'name')->get();
         $categories = Category::select('id', 'name')->get();
 
-       $product = Product::select('id', 'name', 'brand_id', 'size_id', 'color_id', 'status')->with('categories')->find($productId);
-       $productCategories = $product->categories->pluck('id')->toArray();
+        $product = Product::select('id', 'name', 'brand_id', 'size_id', 'color_id', 'status')->with(['categories' => function ($query) {
+            $query->select('id', 'name');
+        }])->find($productId);
+        $productCategories = $product->categories->pluck('id')->toArray();
 
-       foreach ($productCategories as $categoryId) {
-        if (!$categories->contains('id', $categoryId)) {
-                $product->categories()->detach($categoryId);
-            }
-        }
-
-        return view('admin.pages.product.form', compact('product', 'brands', 'colors', 'sizes', 'categories'));
+       return view('admin.pages.product.form', compact('product', 'brands', 'colors', 'sizes', 'categories'));
     }
 
     public function update(ProductValidation $request, Product $product)
     {
         $product->update($request->validated());
-        $product->categories()->sync($request->validated(['category_ids'] ?? []));
+        $product->categories()->sync($request->validated(['category_ids']));
 
         return redirect()->route('product.index')->with('success', 'Product updated successfully.');
     }
