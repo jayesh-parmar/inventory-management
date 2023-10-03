@@ -42,8 +42,10 @@ class CategoryController extends Controller
         if (Category::where('parent_id', $categoryId)->exists()) {
             return redirect()->route('categories.index')->with('error', 'This category cannot be deleted as there are one or more child categories attached.');
         }
-        Category::where('id', $categoryId)->delete();
         
+        if(Category::where('id', $categoryId))
+        return redirect()->route('categories.index')->with('error', 'This category cannot be deleted as there are one or more product attached.');
+
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
 }

@@ -49,9 +49,8 @@ class ProductController extends Controller
         $categories = Category::select('id', 'name')->get();
 
        $product = Product::select('id', 'name', 'brand_id', 'size_id', 'color_id', 'status')->with('categories:id,name')->find($productId);
-       $productCategories = $product->categories->pluck('id')->toArray();
-
-       return view('admin.pages.product.form', compact('product', 'brands', 'colors', 'sizes', 'categories'));
+        
+        return view('admin.pages.product.form', compact('product', 'brands', 'colors', 'sizes', 'categories'));
     }
 
     public function update(ProductValidation $request, Product $product)
