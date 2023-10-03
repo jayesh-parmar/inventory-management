@@ -31,7 +31,8 @@ class ProductController extends Controller
     public function store(ProductValidation $request)
     {
         $product = Product::create($request->validated());
-        $product->attachCategories($request->validated(['category_ids']));
+       
+        $this->attachCategories($product, $request->validated()['category_ids']);
 
         return redirect()->route('product.index')->with('success',  'Product added successfully.');
     }

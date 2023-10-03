@@ -34,8 +34,5 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class);
     }
-    public function attachCategories($categoryIds)
-    {
-        $this->categories()->attach($categoryIds);
-    }
+    
 }
