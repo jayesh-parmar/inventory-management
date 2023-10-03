@@ -30,6 +30,7 @@ it('user can update a brand', function () {
     ->assertRedirect(route('brand.index'));
 
     $this->assertDatabaseHas('brands', [
+        'id' => $brand->id,
         'name' => 'update test',
     ]);
 });

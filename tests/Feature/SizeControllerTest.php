@@ -30,6 +30,7 @@ it('user can update a size', function () {
         ->assertRedirect(route('size.index'));
 
     $this->assertDatabaseHas('sizes', [
+        'id' => $size->id,
         'name' => 'update 2022',
     ]);
 });
