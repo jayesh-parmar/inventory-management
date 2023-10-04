@@ -47,3 +47,18 @@ it('user can delete a categories', function () {
 
     $this->assertDatabaseMissing('categories', ['id' => $categories->id]);
 });
+
+it('user can not delete if child category', function () {
+
+    userLogin();
+
+    $parentCategory = Category::factory()->create();
+    Category::factory()->create(['parent_id' => $parentCategory->id]);
+
+    $this->post(route('categories.destroy', ['categoryId' => $parentCategory->id]))
+    ->assertStatus(302)
+    ->assertRedirect(route('categories.index'))
+    ->assertSessionHas('error', 'This category cannot be deleted as there are one or more child categories attached.');
+    
+    $this->assertDatabaseHas('categories', ['id' => $parentCategory->id]);
+});

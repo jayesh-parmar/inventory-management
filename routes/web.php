@@ -68,7 +68,7 @@ Route::controller(CategoryController::class)->middleware('auth')->name('categori
     Route::post('categories', 'store')->name('store');
     Route::get('categories/{catId}/edit', 'edit')->name('edit');
     Route::post('categories/{category}/update', 'update')->name('update');
-    Route::post('categories/{id}', 'destroy')->name('destroy');
+    Route::post('categories/{categoryId}', 'destroy')->name('destroy');
 });
 
 require __DIR__ . '/auth.php';
