@@ -21,9 +21,9 @@ class ProductFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'brand_id' => Brand::factory(),
-            'size_id' => Size::factory(),
-            'color_id' => Color::factory(),
+            'brand_id' => Brand::factory()->create()->id,
+            'size_id' => Size::factory()->create()->id,
+            'color_id' => Color::factory()->create()->id,
             'status' => 'active',
         ];
     }
