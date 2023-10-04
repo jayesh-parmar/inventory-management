@@ -24,7 +24,7 @@ class ProductFactory extends Factory
             'brand_id' => Brand::factory()->create()->id,
             'size_id' => Size::factory()->create()->id,
             'color_id' => Color::factory()->create()->id,
-            'status' => 'active',
+            'status' => true,
         ];
     }
 }
