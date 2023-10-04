@@ -21,16 +21,16 @@ it('user can update a color', function () {
 
     userLogin();
 
-    $color = Color::factory()->create(['name' => 'red']);
+    $color = Color::factory()->create(['name' => 'red11']);
 
     $this->post(route('color.update', $color->id), [
         'id' => $color->id,
-        'name' => 'update red'
+        'name' => 'update red11'
     ])
         ->assertRedirect(route('color.index'));
 
     $this->assertDatabaseHas('colors', [
         'id' => $color->id,
-        'name' => 'update red',
+        'name' => 'update red11',
     ]);
 });
