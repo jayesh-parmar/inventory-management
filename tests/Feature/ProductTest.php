@@ -28,6 +28,7 @@ it('user can update a product', function () {
     userLogin();
 
     $product = Product::factory()->create();
+    
     $productData = [
         'name' => 'Apple',
         'brand_id' => $product->brand_id,
