@@ -15,7 +15,7 @@ return new class extends Migration
             $table->foreignUuid('brand_id')->constrained();
             $table->foreignUuid('color_id')->nullable()->constrained();
             $table->foreignUuid('size_id')->nullable()->constrained();
-            $table->boolean('status')->default(1)->comment('1:active, 0:archived');
+            $table->enum('status', ['active', 'archived'])->default('active');
             $table->timestamps();
         });
     }
