@@ -15,7 +15,7 @@ class ProductValidation extends FormRequest
             'brand_id' => ['required', 'string', 'exists:brands,id'],
             'color_id' => ['nullable', 'string', 'exists:colors,id'],
             'size_id' => ['nullable', 'string', 'exists:sizes,id'],
-            'status' => ['required', 'string', Rule::in([StatusEnum::ACTIVE, StatusEnum::ARCHIVED])],
+            'status' => ['required', 'string', Rule::in([StatusEnum::ACTIVE, StatusEnum::ARCHIVED, StatusEnum::RECEIVED])],
             'category_ids' => ['required','array'],
             'category_ids.*' => ['string', 'exists:categories,id'],
         ];

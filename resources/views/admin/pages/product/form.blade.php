@@ -70,8 +70,12 @@
                     <span class="ml-2">Pending</span>
                 </label>
                 <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
-                    <input type="radio" {{ old('status', isset($product) ? $product->status : null) == 'archived' ? 'checked' : '' }} class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="status" value="archived" />
+                    <input type="radio" {{ old('status', isset($product) ? $product->status : null) == 'archived' ? 'checked' : '' }} class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700" name="status" value="archived" />
                     <span class="ml-2">Delivered</span>
+                </label>
+                <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
+                    <input type="radio" {{ old('status', isset($product) ? $product->status : null) == 'received' ? 'checked' : '' }} class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700" name="status" value="received" />
+                    <span class="ml-2">Received</span>
                 </label>
             </div>
         </div>

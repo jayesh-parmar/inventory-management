@@ -6,4 +6,5 @@ class StatusEnum
 {
     const ACTIVE = 'active';
     const ARCHIVED = 'archived';
+    const RECEIVED  = 'received';
 }
