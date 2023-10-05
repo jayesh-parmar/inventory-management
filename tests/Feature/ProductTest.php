@@ -20,13 +20,28 @@ it('user can add a new product', function () {
         'size_id' => Size::factory()->create()->id,
         'color_id' => Color::factory()->create()->id,
         'status' => true,
+        'category_ids' => $categoryIds,
     ];
 
-    $this->post(route('product.store'), array_merge($productData, ['category_ids' => $categoryIds]))
-    ->assertStatus(302)
-    ->assertRedirect(route('product.index'));
-    
-    $this->assertDatabaseHas('products', $productData);        
+    $this->post(route('product.store'), $productData)
+         ->assertStatus(302)
+         ->assertRedirect(route('product.index'));
+
+    $this->assertDatabaseHas('products', [
+        'name' => 'PDU',
+        'brand_id' => $productData['brand_id'],
+        'size_id' => $productData['size_id'],
+        'color_id' => $productData['color_id'],
+        'status' => $productData['status'],
+    ]);
+
+        $product = Product::where('name', 'PDU')->first();
+        foreach ($categoryIds as $categoryId) {
+            $this->assertDatabaseHas('category_product', [
+                'product_id' => $product->id,
+                'category_id' => $categoryId,
+            ]);
+        }
 });
 
 it('user can update a product', function () {
@@ -51,16 +66,28 @@ it('user can update a product', function () {
         'size_id' => $productData->size_id,
         'color_id' => $productData->color_id,
         'status' => false,
+        'category_ids' => $categoryIds,
     ];
     
-    $this->post(route('product.update', $productData->id), array_merge($updateProductData, ['category_ids' => $categoryIds]))
+    $this->post(route('product.update', $productData->id), $updateProductData)
         ->assertStatus(302)
         ->assertRedirect(route('product.index'));
 
-    $updatedProduct = Product::find($productData->id);
+    $this->assertDatabaseHas('products', [
+        'name' => 'PDU Update',
+        'brand_id' => $productData->brand_id,
+        'size_id' => $productData->size_id,
+        'color_id' => $productData->color_id,
+        'status' => false,
+    ] );
 
-    $this->assertCount(3, $updatedProduct->categories);
-    $this->assertDatabaseHas('products', $updateProductData);
+    $product = Product::where('name', 'PDU Update')->first();
+    foreach ($categoryIds as $categoryId) {
+        $this->assertDatabaseHas('category_product', [
+            'product_id' => $product->id,
+            'category_id' => $categoryId,
+        ]);
+    }
 });
 
 it('user cannot add or update product with missing required fields', function (){
