@@ -10,6 +10,8 @@ class Store extends Model
 {
     use HasFactory, HasUuids;
 
+    public $timestamps = false;
+    
     protected $fillable = [
         'name',
     ]; 
