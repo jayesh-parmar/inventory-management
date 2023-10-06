@@ -44,10 +44,11 @@ it('user can update a product', function () {
 
     userLogin();
 
-    $categoryIds = Category::factory(3)->create()->pluck('id')->map(function ($id) {
+    $categories = Category::factory(3)->create();
+    $categoryIds = $categories->pluck('id')->map(function ($id) {
         return (string) $id;
     })->toArray();
-
+    
     $productData = Product::factory()->create([
         'name' => 'PDU',
         'brand_id' => Brand::factory()->create()->id,
@@ -77,7 +78,7 @@ it('user can update a product', function () {
         'status' => false,
     ] );
 
-    $firstCategoryId = reset($categoryIds); 
+    $firstCategoryId = $categories->first()->id;
     $this->assertDatabaseHas('category_product', [
         'category_id' => $firstCategoryId,
     ]);
