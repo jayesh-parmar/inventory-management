@@ -10,9 +10,9 @@ it('user can add a new product', function () {
 
     userLogin();
 
-    $categoryIds = Category::factory(3)->create()->pluck('id')->map(function ($id) {
-        return (string) $id;
-    })->toArray();
+    $categories = Category::factory(3)->create();
+    $string = implode(',', $categories->pluck('id')->toArray());
+    $categoryIds = explode(',', $string);
 
     $productData = [
         'name' => 'PDU',
@@ -45,10 +45,9 @@ it('user can update a product', function () {
     userLogin();
 
     $categories = Category::factory(3)->create();
-    $categoryIds = $categories->pluck('id')->map(function ($id) {
-        return (string) $id;
-    })->toArray();
-    
+    $string = implode(',', $categories->pluck('id')->toArray());
+    $categoryIds = explode(',', $string);
+
     $productData = Product::factory()->create([
         'name' => 'PDU',
         'brand_id' => Brand::factory()->create()->id,
