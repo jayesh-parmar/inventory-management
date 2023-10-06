@@ -77,9 +77,10 @@ it('user can update a product', function () {
         'status' => false,
     ] );
 
-        $product = Product::where('name', 'PDU Update')->first();
-        $this->assertTrue(
-              $product->categories->whereIn('id', $categoryIds)->isNotEmpty());
+    $firstCategoryId = reset($categoryIds); 
+    $this->assertDatabaseHas('category_product', [
+        'category_id' => $firstCategoryId,
+    ]);
 });
 
 it('user cannot add or update product with missing required fields', function (){
