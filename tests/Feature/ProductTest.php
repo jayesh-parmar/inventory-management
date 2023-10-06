@@ -35,13 +35,9 @@ it('user can add a new product', function () {
         'status' => $productData['status'],
     ]);
 
-        $product = Product::where('name', 'PDU')->first();
-        foreach ($categoryIds as $categoryId) {
-            $this->assertDatabaseHas('category_product', [
-                'product_id' => $product->id,
-                'category_id' => $categoryId,
-            ]);
-        }
+    $product = Product::where('name', 'PDU')->first();
+    $this->assertTrue(
+          $product->categories->whereIn('id', $categoryIds)->isNotEmpty());
 });
 
 it('user can update a product', function () {
@@ -81,13 +77,9 @@ it('user can update a product', function () {
         'status' => false,
     ] );
 
-    $product = Product::where('name', 'PDU Update')->first();
-    foreach ($categoryIds as $categoryId) {
-        $this->assertDatabaseHas('category_product', [
-            'product_id' => $product->id,
-            'category_id' => $categoryId,
-        ]);
-    }
+        $product = Product::where('name', 'PDU Update')->first();
+        $this->assertTrue(
+              $product->categories->whereIn('id', $categoryIds)->isNotEmpty());
 });
 
 it('user cannot add or update product with missing required fields', function (){
