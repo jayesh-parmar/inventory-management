@@ -6,5 +6,9 @@ class StatusEnum
 {
     const ACTIVE = 'active';
     const ARCHIVED = 'archived';
-    const RECEIVED  = 'received';
+
+    public static function values()
+    {
+        return [self::ACTIVE, self::ARCHIVED];
+    }
 }
