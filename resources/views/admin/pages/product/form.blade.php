@@ -66,11 +66,11 @@
             </span>
             <div class="mt-2">
                 <label class="inline-flex items-center text-gray-600 dark:text-gray-400">
-                    <input type="radio" {{ old('status', isset($product) ? $product->status : null) == App\Enums\StatusEnum::ACTIVE ? 'checked' : '' }} class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="status" value="{{ App\Enums\StatusEnum::ACTIVE }}" />
+                    <input type="radio" {{ old('status', isset($product) ? $product->status : null) == $statuses['active']  ? 'checked' : '' }} class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="status" value="{{ $statuses['active']  }}" />
                     <span class="ml-2">Active</span>
                 </label>
                 <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
-                    <input type="radio" {{ old('status', isset($product) ? $product->status : null) == 'App\Enums\StatusEnum::ARCHIVED' ? 'checked' : '' }} class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700" name="status" value="{{ App\Enums\StatusEnum::ARCHIVED }}" />
+                    <input type="radio" {{ old('status', isset($product) ? $product->status : null) == $statuses['archived']  ? 'checked' : '' }} class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700" name="status" value="{{ $statuses['archived']  }}" />
                     <span class="ml-2">Archived</span>
                 </label>
             </div>
