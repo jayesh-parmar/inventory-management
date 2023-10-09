@@ -2,20 +2,20 @@
 
 namespace App\Enums;
 
-class StatusEnum
+enum StatusEnum: string
 {
-const ACTIVE = 'active';
-const ARCHIVED = 'archived';
+    case ACTIVE = 'active';
+    case ARCHIVED = 'archived';
 
-public static function getStatusesString()
-{
-    return collect([self::ACTIVE, self::ARCHIVED])->implode(',');
+    public static function getStatusesString()
+    {
+        return collect(self::cases())->pluck('value')->implode(',');
+    }
+
+    public static function values()
+    {
+        return [self::ACTIVE, self::ARCHIVED];
+    }
 }
 
-public static function values()
-{
-    return [self::ACTIVE, self::ARCHIVED];
-}
-
-}
 
