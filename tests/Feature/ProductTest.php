@@ -11,8 +11,7 @@ it('user can add a new product', function () {
     userLogin();
 
     $categories = Category::factory(3)->create();
-    $string = implode(',', $categories->pluck('id')->toArray());
-    $categoryIds = explode(',', $string);
+    $categoryIds = $categories->pluck('id')->toArray();
 
     $productData = [
         'name' => 'PDU',
@@ -45,8 +44,7 @@ it('user can update a product', function () {
     userLogin();
 
     $categories = Category::factory(3)->create();
-    $string = implode(',', $categories->pluck('id')->toArray());
-    $categoryIds = explode(',', $string);
+    $categoryIds = $categories->pluck('id')->toArray();
 
     $productData = Product::factory()->create([
         'name' => 'PDU',
