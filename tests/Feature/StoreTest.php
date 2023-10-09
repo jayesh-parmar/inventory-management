@@ -47,3 +47,8 @@ it('user can delete a store', function () {
 
     $this->assertDatabaseMissing('stores', ['id' => $store->id]);
 });
+
+it('user cannot visit the stores page without login', function () {
+    $this->get(route('store.index'))
+        ->assertRedirect(route('login')); 
+});

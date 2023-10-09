@@ -23,7 +23,7 @@ class StoreController extends Controller
     {
         Store::create($request->validated());
 
-        return redirect()->route('store.index')->with('success', 'store Added successfully.');
+        return redirect()->route('store.index')->with('success', 'Store added  successfully.');
     }
 
     public function edit(string $storeId)
@@ -37,7 +37,7 @@ class StoreController extends Controller
     {
         $store->update($request->validated());
 
-        return redirect()->route('store.index')->with('success', 'store Update successfully.');
+        return redirect()->route('store.index')->with('success', 'Store update successfully.');
     }
 
     public function destroy(string $storeId)
