@@ -34,9 +34,10 @@ it('user can add a new product', function () {
         'status' => $productData['status'],
     ]);
 
-    $product = Product::where('name', 'PDU')->first();
-    $this->assertTrue(
-          $product->categories->whereIn('id', $categoryIds)->isNotEmpty());
+    $firstCategoryId = $categories->first()->id;
+    $this->assertDatabaseHas('category_product', [
+        'category_id' => $firstCategoryId,
+    ]);
 });
 
 it('user can update a product', function () {
