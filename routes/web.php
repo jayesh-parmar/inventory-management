@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SizeController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,6 +70,15 @@ Route::controller(CategoryController::class)->middleware('auth')->name('categori
     Route::get('categories/{catId}/edit', 'edit')->name('edit');
     Route::post('categories/{category}/update', 'update')->name('update');
     Route::post('categories/{categoryId}', 'destroy')->name('destroy');
+});
+
+Route::controller(StoreController::class)->middleware('auth')->name('store.')->group(function () {
+    Route::get('stores', 'index')->name('index');
+    Route::get('stores/create', 'add')->name('create');
+    Route::post('stores', 'store')->name('store');
+    Route::get('stores/{storeId}/edit', 'edit')->name('edit');
+    Route::post('stores/{store}/update', 'update')->name('update');
+    Route::get('stores/{storeId}', 'destroy')->name('destroy');
 });
 
 require __DIR__ . '/auth.php';
