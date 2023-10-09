@@ -9,15 +9,13 @@ const ARCHIVED = 'archived';
 
 public static function getStatusesString()
 {
-$statuses = self::values();
-return collect($statuses)->implode(',');
+    return collect([self::ACTIVE, self::ARCHIVED])->implode(',');
 }
 
 public static function values()
 {
-return [self::ACTIVE, self::ARCHIVED];
-}
+    return [self::ACTIVE, self::ARCHIVED];
 }
 
-// Now you can use it like this:
-$statuses = StatusEnum::getStatusesString();
+}
+
