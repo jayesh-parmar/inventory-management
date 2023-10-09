@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\StatusEnum;
 use App\Http\Requests\ProductValidation;
 use App\Models\Brand;
 use App\Models\Category;
@@ -24,8 +25,9 @@ class ProductController extends Controller
         $colors = Color::select('id', 'name')->get();
         $sizes = Size::select('id', 'name')->get();
         $categories = Category::select('id', 'name')->get();
+        $statuses = StatusEnum::getStatusesString();
 
-        return view('admin.pages.product.form', compact('brands', 'colors', 'sizes', 'categories'));
+        return view('admin.pages.product.form', compact('brands', 'colors', 'sizes', 'categories', 'statuses'));
     }  
 
     public function store(ProductValidation $request)
@@ -48,10 +50,11 @@ class ProductController extends Controller
         $colors = Color::select('id', 'name')->get();
         $sizes = Size::select('id', 'name')->get();
         $categories = Category::select('id', 'name')->get();
+        $statuses = StatusEnum::getStatusesString();
 
        $product = Product::select('id', 'name', 'brand_id', 'size_id', 'color_id', 'status')->with('categories:id,name')->find($productId);
         
-        return view('admin.pages.product.form', compact('product', 'brands', 'colors', 'sizes', 'categories'));
+        return view('admin.pages.product.form', compact('product', 'brands', 'colors', 'sizes', 'categories', 'statuses'));
     }
 
     public function update(ProductValidation $request, Product $product)

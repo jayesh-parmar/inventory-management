@@ -65,13 +65,17 @@
                 Status
             </span>
             <div class="mt-2">
+                @php
+                $statuses = explode(',', $statuses);
+                @endphp
+
                 <label class="inline-flex items-center text-gray-600 dark:text-gray-400">
-                    <input type="radio" {{ old('status', isset($product) ? $product->status : null) == '0' ? 'checked' : '' }} class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="status" value="0" />
-                    <span class="ml-2">Pending</span>
+                    <input type="radio" {{ old('status', isset($product) ? $product->status : null) == $statuses[0] ? 'checked' : '' }} class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="status" value="{{ $statuses[0] }}" />
+                    <span class="ml-2">Active</span>
                 </label>
                 <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
-                    <input type="radio" {{ old('status', isset($product) ? $product->status : null) == '1' ? 'checked' : '' }} class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" name="status" value="1" />
-                    <span class="ml-2">Delivered</span>
+                    <input type="radio" {{ old('status', isset($product) ? $product->status : null) == $statuses[1] ? 'checked' : '' }} class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700" name="status" value="{{ $statuses[1] }}" />
+                    <span class="ml-2">Archived</span>
                 </label>
             </div>
         </div>
