@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
     <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-        @if (isset($stores)) Update @else Add @endif Store
+        @if (isset($store)) Update @else Add @endif Store
     </h4>
     <form action="{{ isset($store) ? route('store.update', $store->id) : route('store.store') }}" method="post" class="mt-5">
         @csrf
