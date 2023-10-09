@@ -25,7 +25,7 @@ class ProductController extends Controller
         $colors = Color::select('id', 'name')->get();
         $sizes = Size::select('id', 'name')->get();
         $categories = Category::select('id', 'name')->get();
-        $statuses = ['active' => StatusEnum::ACTIVE,'archived' => StatusEnum::ARCHIVED];
+        $statuses = StatusEnum::getStatusesString();
 
         return view('admin.pages.product.form', compact('brands', 'colors', 'sizes', 'categories', 'statuses'));
     }  
@@ -50,7 +50,7 @@ class ProductController extends Controller
         $colors = Color::select('id', 'name')->get();
         $sizes = Size::select('id', 'name')->get();
         $categories = Category::select('id', 'name')->get();
-        $statuses = ['active' => StatusEnum::ACTIVE, 'archived' => StatusEnum::ARCHIVED];
+        $statuses = StatusEnum::getStatusesString();
 
        $product = Product::select('id', 'name', 'brand_id', 'size_id', 'color_id', 'status')->with('categories:id,name')->find($productId);
         
