@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\WarehouseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,6 +80,15 @@ Route::controller(StoreController::class)->middleware('auth')->name('store.')->g
     Route::get('stores/{storeId}/edit', 'edit')->name('edit');
     Route::post('stores/{store}/update', 'update')->name('update');
     Route::get('stores/{storeId}', 'destroy')->name('destroy');
+});
+
+Route::controller(WarehouseController::class)->middleware('auth')->name('warehouse.')->group(function () {
+    Route::get('warehouses', 'index')->name('index');
+    Route::get('warehouses/create', 'add')->name('create');
+    Route::post('warehouses', 'store')->name('store');
+    Route::get('warehouses/{warehouseId}/edit', 'edit')->name('edit');
+    Route::post('warehouses/{warehouse}/update', 'update')->name('update');
+    Route::get('warehouses/{warehouseId}', 'destroy')->name('destroy');
 });
 
 require __DIR__ . '/auth.php';
